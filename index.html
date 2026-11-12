@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #09090b;
-            --surface: #121216;
-            --surface-hover: #18181f;
+            --bg: #07070a;
+            --surface: rgba(18, 18, 24, 0.72);
+            --surface-hover: rgba(26, 26, 35, 0.85);
             --border: rgba(255, 255, 255, 0.08);
-            --border-hover: rgba(139, 92, 246, 0.45);
+            --border-hover: rgba(139, 92, 246, 0.5);
             --text: #fafafa;
             --muted: #a1a1aa;
             --accent: #7c3aed;
@@ -30,23 +30,36 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            perspective: 1200px;
         }
         h1, h2, h3, .logo, .stat-num {
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
         a { text-decoration: none; color: inherit; }
 
-        /* Subtle SaaS Ambient Top Spotlight */
+        /* 3D Interactive Canvas Background */
+        #bg3d {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Ambient Top Spotlight */
         .ambient-glow {
             position: fixed;
-            top: -180px;
+            top: -200px;
             left: 50%;
             transform: translateX(-50%);
-            width: 850px;
-            height: 450px;
-            background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.16) 0%, rgba(56, 189, 248, 0.06) 45%, transparent 75%);
+            width: 900px;
+            height: 480px;
+            background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.18) 0%, rgba(56, 189, 248, 0.07) 45%, transparent 75%);
             pointer-events: none;
             z-index: -1;
+            transition: transform 0.2s ease-out;
         }
 
         /* Navbar */
@@ -58,8 +71,8 @@
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
-            background: rgba(9, 9, 11, 0.82);
-            backdrop-filter: blur(14px);
+            background: rgba(7, 7, 10, 0.78);
+            backdrop-filter: blur(16px);
             z-index: 100;
         }
         .logo {
@@ -86,31 +99,37 @@
         .nav-btn {
             background: var(--text);
             color: var(--bg);
-            padding: 0.5rem 1.1rem;
+            padding: 0.5rem 1.15rem;
             border-radius: 8px;
             font-weight: 600;
             font-size: 0.88rem;
-            transition: transform 0.2s ease, opacity 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        .nav-btn:hover { transform: translateY(-1px); opacity: 0.92; }
+        .nav-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
+        }
 
-        /* Hero Section */
+        /* Hero Section with 3D Parallax Depth */
         .hero {
             text-align: center;
-            padding: 5rem 8% 3.5rem;
-            max-width: 860px;
+            padding: 5.2rem 8% 3.5rem;
+            max-width: 880px;
             margin: 0 auto;
+            transform-style: preserve-3d;
+            transition: transform 0.12s ease-out;
         }
         .profile-wrap {
             margin-bottom: 1.4rem;
             display: inline-block;
+            transform: translateZ(25px);
         }
         .profile-pic {
-            width: 96px;
+            width: 98px;
             height: auto;
             border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(167, 139, 250, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             display: block;
             margin: 0 auto;
             background: var(--surface);
@@ -127,23 +146,24 @@
             font-weight: 500;
             color: var(--muted);
             margin-bottom: 1.4rem;
+            backdrop-filter: blur(8px);
         }
         .status-dot {
             width: 7px;
             height: 7px;
             border-radius: 50%;
             background: #22c55e;
-            box-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
+            box-shadow: 0 0 8px rgba(34, 197, 94, 0.8);
         }
         .hero-name {
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             color: var(--accent-light);
             letter-spacing: 0.02em;
             margin-bottom: 0.5rem;
         }
         .hero h1 {
-            font-size: clamp(2.1rem, 4.6vw, 3.4rem);
+            font-size: clamp(2.15rem, 4.6vw, 3.45rem);
             font-weight: 800;
             line-height: 1.15;
             letter-spacing: -0.03em;
@@ -168,37 +188,37 @@
             flex-wrap: wrap;
         }
         .btn-primary {
-            background: var(--accent);
+            background: linear-gradient(135deg, #7c3aed, #6366f1);
             color: #fff;
-            padding: 0.8rem 1.6rem;
+            padding: 0.82rem 1.65rem;
             border-radius: 10px;
             font-weight: 600;
             font-size: 0.92rem;
-            transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 18px rgba(124, 58, 237, 0.35);
         }
         .btn-primary:hover {
-            background: #6d28d9;
             transform: translateY(-2px);
-            box-shadow: 0 6px 22px rgba(124, 58, 237, 0.45);
+            box-shadow: 0 8px 26px rgba(124, 58, 237, 0.55);
         }
         .btn-secondary {
             background: var(--surface);
             color: var(--text);
-            padding: 0.8rem 1.6rem;
+            padding: 0.82rem 1.65rem;
             border-radius: 10px;
             font-weight: 600;
             font-size: 0.92rem;
             border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
             transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
         }
         .btn-secondary:hover {
-            border-color: rgba(255, 255, 255, 0.22);
+            border-color: rgba(255, 255, 255, 0.25);
             background: var(--surface-hover);
             transform: translateY(-2px);
         }
 
-        /* Clean 4-Column SaaS Metrics Row */
+        /* 4-Column SaaS Metrics Row */
         .stats-wrap {
             max-width: 1040px;
             margin: 0 auto 3.5rem;
@@ -218,6 +238,7 @@
             border-radius: 14px;
             padding: 1.3rem 1rem;
             text-align: center;
+            backdrop-filter: blur(12px);
             transition: border-color 0.25s ease, transform 0.25s ease;
         }
         .stat-card:hover {
@@ -236,11 +257,12 @@
             font-weight: 500;
         }
 
-        /* Static Clean Tools Strip (Patti Roki Hui) */
+        /* Static Clean Tools Strip */
         .tools-bar {
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
-            background: rgba(18, 18, 22, 0.5);
+            background: rgba(14, 14, 19, 0.65);
+            backdrop-filter: blur(12px);
             padding: 1.2rem 8%;
         }
         .tools-inner {
@@ -260,11 +282,12 @@
             font-size: 0.83rem;
             color: var(--muted);
             font-weight: 500;
-            transition: color 0.2s ease, border-color 0.2s ease;
+            transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
         }
         .tool-pill:hover {
             color: var(--text);
-            border-color: rgba(255, 255, 255, 0.2);
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
         }
 
         /* Sections */
@@ -305,6 +328,7 @@
             cursor: pointer;
             font-weight: 500;
             font-size: 0.88rem;
+            backdrop-filter: blur(8px);
             transition: all 0.2s ease;
         }
         .filter-btn.active, .filter-btn:hover {
@@ -313,23 +337,37 @@
             border-color: var(--text);
         }
 
-        /* Project Grid */
+        /* 3D Glass Cards with Mouse Spotlight Glare */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
             gap: 1.6rem;
         }
-        .card {
+        .card, .service-card {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 16px;
             overflow: hidden;
-            transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.28s ease, box-shadow 0.28s ease;
+            position: relative;
+            backdrop-filter: blur(14px);
+            transform-style: preserve-3d;
+            transition: transform 0.15s ease-out, border-color 0.25s ease, box-shadow 0.25s ease;
         }
-        .card:hover {
-            transform: translateY(-5px);
+        .card::after, .service-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(350px circle at var(--mx, 50%) var(--my, 50%), rgba(167, 139, 250, 0.12), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .card:hover::after, .service-card:hover::after {
+            opacity: 1;
+        }
+        .card:hover, .service-card:hover {
             border-color: var(--border-hover);
-            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
         .video-box {
             position: relative;
@@ -373,22 +411,14 @@
             gap: 1.5rem;
         }
         .service-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
             padding: 1.8rem;
-            border-radius: 16px;
-            transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.28s ease;
-        }
-        .service-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--border-hover);
         }
         .step-badge {
             display: inline-block;
             font-size: 0.72rem;
             font-weight: 600;
             color: var(--accent-light);
-            background: rgba(124, 58, 237, 0.12);
+            background: rgba(124, 58, 237, 0.14);
             padding: 0.25rem 0.65rem;
             border-radius: 6px;
             margin-bottom: 0.85rem;
@@ -407,12 +437,13 @@
         /* CTA */
         .cta {
             text-align: center;
-            background: linear-gradient(180deg, var(--surface) 0%, rgba(124, 58, 237, 0.08) 100%);
+            background: linear-gradient(180deg, var(--surface) 0%, rgba(124, 58, 237, 0.1) 100%);
             border: 1px solid var(--border);
             border-radius: 20px;
             padding: 3.5rem 2rem;
             margin: 1.5rem auto 4rem;
             max-width: 1000px;
+            backdrop-filter: blur(14px);
         }
         .cta h2 {
             font-size: 1.9rem;
@@ -433,10 +464,10 @@
             flex-wrap: wrap;
         }
 
-        /* Smooth SaaS Motion Reveal */
+        /* Smooth SaaS Scroll Reveal */
         .saas-reveal {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(22px);
             transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .saas-reveal.visible {
@@ -455,7 +486,8 @@
 </head>
 <body>
 
-    <div class="ambient-glow"></div>
+    <canvas id="bg3d"></canvas>
+    <div class="ambient-glow" id="ambientGlow"></div>
 
     <nav>
         <a href="#" class="logo">Muhammad <span>Ahsan</span></a>
@@ -466,8 +498,7 @@
         </div>
     </nav>
 
-    <section class="hero saas-reveal visible">
-        <!-- Jab tak profile.jpg upload nahi hoti, ye clean circle hide rahega -->
+    <section class="hero saas-reveal visible" id="hero3d">
         <div class="profile-wrap" id="profileWrap">
             <img src="profile.jpg" alt="Muhammad Ahsan Raza" class="profile-pic" onerror="document.getElementById('profileWrap').style.display='none'">
         </div>
@@ -532,7 +563,7 @@
         </div>
 
         <div class="grid">
-            <div class="card" data-cat="dr">
+            <div class="card tilt-glass" data-cat="dr">
                 <div class="video-box">
                     <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                 </div>
@@ -543,7 +574,7 @@
                 </div>
             </div>
 
-            <div class="card" data-cat="ugc">
+            <div class="card tilt-glass" data-cat="ugc">
                 <div class="video-box">
                     <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                 </div>
@@ -554,7 +585,7 @@
                 </div>
             </div>
 
-            <div class="card" data-cat="pixar">
+            <div class="card tilt-glass" data-cat="pixar">
                 <div class="video-box">
                     <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                 </div>
@@ -573,17 +604,17 @@
             <p>Tailored video solutions built for modern social media & paid ads</p>
         </div>
         <div class="services-grid">
-            <div class="service-card">
+            <div class="service-card tilt-glass">
                 <div class="step-badge">01 • PERFORMANCE</div>
                 <h3>Direct Response Video Editing</h3>
                 <p>Scroll-stopping TikTok, Reels, and YouTube ads with strong 3-second hooks, dynamic pacing, and conversion-focused CTAs.</p>
             </div>
-            <div class="service-card">
+            <div class="service-card tilt-glass">
                 <div class="step-badge">02 • AI COMMERCIALS</div>
                 <h3>AI UGC & Commercial Reels</h3>
                 <p>Cost-effective, hyper-realistic UGC ads using AI video generation and studio-grade voiceovers without expensive shoots.</p>
             </div>
-            <div class="service-card">
+            <div class="service-card tilt-glass">
                 <div class="step-badge">03 • 3D STORYTELLING</div>
                 <h3>Pixar-Style Animation</h3>
                 <p>Eye-catching 3D animated promos, explainer reels, and mascot storytelling that stand out in crowded feeds.</p>
@@ -620,13 +651,146 @@
         // Smooth SaaS Scroll Reveal
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.1 });
-
         document.querySelectorAll('.saas-reveal').forEach(el => observer.observe(el));
+
+        // 3D Glass Tilt & Spotlight Glare on Cards
+        document.querySelectorAll('.tilt-glass').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mx', `${x}px`);
+                card.style.setProperty('--my', `${y}px`);
+
+                const rotY = ((x / rect.width) - 0.5) * 7;
+                const rotX = -((y / rect.height) - 0.5) * 7;
+                card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+            });
+        });
+
+        // True 3D Interactive Rotating Point-Cloud Sphere/Wave Background
+        const canvas = document.getElementById('bg3d');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Create 3D points arranged in a sleek 3D torus/grid field
+        const points = [];
+        const rows = 14, cols = 22;
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < cols; j++) {
+                points.push({
+                    ox: (j - cols / 2) * 85,
+                    oy: (i - rows / 2) * 75,
+                    oz: Math.sin(i * 0.5) * Math.cos(j * 0.5) * 140
+                });
+            }
+        }
+
+        let targetRotX = 0.25, targetRotY = 0;
+        let currentRotX = 0.25, currentRotY = 0;
+        let autoAngle = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            const nx = (e.clientX / width) - 0.5;
+            const ny = (e.clientY / height) - 0.5;
+            targetRotY = nx * 0.85;
+            targetRotX = 0.25 - ny * 0.55;
+
+            const glow = document.getElementById('ambientGlow');
+            if (glow) {
+                glow.style.transform = `translate(calc(-50% + ${nx * 90}px), ${ny * 50}px)`;
+            }
+
+            const hero = document.getElementById('hero3d');
+            if (hero) {
+                hero.style.transform = `rotateY(${nx * 3}deg) rotateX(${-ny * 3}deg)`;
+            }
+        });
+
+        function render3D() {
+            ctx.clearRect(0, 0, width, height);
+            autoAngle += 0.003;
+
+            currentRotX += (targetRotX - currentRotX) * 0.06;
+            currentRotY += (targetRotY + Math.sin(autoAngle) * 0.15 - currentRotY) * 0.06;
+
+            const cosX = Math.cos(currentRotX), sinX = Math.sin(currentRotX);
+            const cosY = Math.cos(currentRotY), sinY = Math.sin(currentRotY);
+            const fov = 750;
+
+            const projected = points.map((p, idx) => {
+                // Subtle wave breathing in 3D space
+                const waveZ = p.oz + Math.sin(autoAngle * 2 + idx * 0.2) * 22;
+
+                // Rotate around Y
+                let x1 = p.ox * cosY - waveZ * sinY;
+                let z1 = waveZ * cosY + p.ox * sinY;
+
+                // Rotate around X
+                let y2 = p.oy * cosX - z1 * sinX;
+                let z2 = z1 * cosX + p.oy * sinX;
+
+                const scale = fov / (fov + z2 + 450);
+                return {
+                    x: width / 2 + x1 * scale,
+                    y: height / 2 + y2 * scale,
+                    scale: scale,
+                    z: z2
+                };
+            });
+
+            // Draw subtle 3D connecting lines
+            ctx.lineWidth = 0.7;
+            for (let i = 0; i < rows; i++) {
+                for (let j = 0; j < cols; j++) {
+                    const idx = i * cols + j;
+                    const p = projected[idx];
+                    if (p.scale <= 0) continue;
+
+                    if (j < cols - 1) {
+                        const pRight = projected[idx + 1];
+                        const alpha = Math.max(0.02, Math.min(0.16, p.scale * 0.15));
+                        ctx.strokeStyle = `rgba(139, 92, 246, ${alpha})`;
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(pRight.x, pRight.y);
+                        ctx.stroke();
+                    }
+                    if (i < rows - 1) {
+                        const pDown = projected[idx + cols];
+                        const alpha = Math.max(0.02, Math.min(0.14, p.scale * 0.13));
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(pDown.x, pDown.y);
+                        ctx.stroke();
+                    }
+
+                    // Draw 3D node dot
+                    const dotAlpha = Math.max(0.08, Math.min(0.45, p.scale * 0.4));
+                    ctx.fillStyle = `rgba(167, 139, 250, ${dotAlpha})`;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, Math.max(0.8, p.scale * 1.8), 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            requestAnimationFrame(render3D);
+        }
+        render3D();
     </script>
 </body>
 </html>
