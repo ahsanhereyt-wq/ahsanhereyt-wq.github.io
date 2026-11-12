@@ -6,13 +6,14 @@
     <title>Ahsan Edits | Direct Response, AI UGC & Pixar-Style 3D</title>
     <style>
         :root {
-            --bg: #05050a;
-            --card: rgba(18, 18, 28, 0.72);
-            --border: rgba(139, 92, 246, 0.25);
+            --bg: #030308;
+            --card: rgba(15, 15, 26, 0.78);
+            --border: rgba(139, 92, 246, 0.3);
             --text: #f8fafc;
             --muted: #94a3b8;
-            --accent: #8b5cf6;
+            --purple: #8b5cf6;
             --cyan: #38bdf8;
+            --pink: #ec4899;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
         html { scroll-behavior: smooth; }
@@ -20,124 +21,153 @@
             background: var(--bg);
             color: var(--text);
             overflow-x: hidden;
-            perspective: 1200px;
+            perspective: 1400px;
         }
         a { text-decoration: none; color: inherit; }
 
-        /* Animated 4D Ambient Background Orbs */
-        .bg-canvas {
+        /* 4D Interactive Particle Canvas */
+        #particleCanvas {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -1; overflow: hidden; pointer-events: none;
-        }
-        .orb {
-            position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.45;
-            animation: floatOrb 12s infinite alternate ease-in-out;
-            transition: transform 0.25s ease-out;
-        }
-        .orb-1 { width: 420px; height: 420px; background: #7c3aed; top: -80px; left: -60px; }
-        .orb-2 { width: 380px; height: 380px; background: #0284c7; bottom: 5%; right: -60px; animation-delay: -4s; }
-        .orb-3 { width: 280px; height: 280px; background: #ec4899; top: 45%; left: 40%; opacity: 0.22; animation-delay: -8s; }
-
-        @keyframes floatOrb {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(40px, -50px) scale(1.15); }
+            z-index: -2; pointer-events: none;
         }
 
-        /* Subtle Grid Overlay */
-        .grid-bg {
+        /* Mouse Spotlight Aura */
+        .cursor-glow {
+            position: fixed; width: 450px; height: 450px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.18) 0%, rgba(56, 189, 248, 0.08) 40%, transparent 70%);
+            pointer-events: none; transform: translate(-50%, -50%); z-index: -1;
+            transition: width 0.2s, height 0.2s;
+        }
+
+        /* 3D Perspective Grid Floor */
+        .cyber-grid {
             position: fixed; inset: 0; z-index: -1; pointer-events: none;
-            background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
+            background-image: linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(139, 92, 246, 0.04) 1px, transparent 1px);
+            background-size: 45px 45px;
+            mask-image: radial-gradient(circle at center, black 35%, transparent 88%);
         }
 
         /* Navbar */
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 1.2rem 8%; border-bottom: 1px solid rgba(255,255,255,0.07);
-            position: sticky; top: 0; background: rgba(5, 5, 10, 0.75);
-            backdrop-filter: blur(16px); z-index: 100;
+            padding: 1.1rem 8%; border-bottom: 1px solid rgba(255,255,255,0.08);
+            position: sticky; top: 0; background: rgba(3, 3, 8, 0.8);
+            backdrop-filter: blur(18px); z-index: 100;
         }
-        .logo { font-size: 1.45rem; font-weight: 800; letter-spacing: -0.5px; }
+        .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px; }
+        .logo-dot { width: 10px; height: 10px; background: var(--cyan); border-radius: 50%; box-shadow: 0 0 12px var(--cyan); animation: pulseDot 1.5s infinite; }
         .logo span {
             background: linear-gradient(90deg, #a78bfa, #38bdf8);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
+        @keyframes pulseDot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+        }
         .nav-btn {
             background: linear-gradient(135deg, #7c3aed, #2563eb); color: #fff;
-            padding: 0.6rem 1.3rem; border-radius: 10px; font-weight: 600; font-size: 0.9rem;
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.4); transition: 0.3s;
+            padding: 0.6rem 1.4rem; border-radius: 10px; font-weight: 700; font-size: 0.9rem;
+            box-shadow: 0 0 22px rgba(124, 58, 237, 0.5); transition: 0.25s;
         }
-        .nav-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 0 28px rgba(56, 189, 248, 0.6); }
+        .nav-btn:hover { transform: scale(1.06); box-shadow: 0 0 32px rgba(56, 189, 248, 0.8); }
 
-        /* Hero with 4D Pan Layer */
+        /* Hero 4D Stage */
         .hero {
-            text-align: center; padding: 5rem 8% 3.5rem; max-width: 960px; margin: 0 auto;
-            transform-style: preserve-3d; transition: transform 0.15s ease-out;
+            text-align: center; padding: 4.5rem 8% 3rem; max-width: 980px; margin: 0 auto;
+            transform-style: preserve-3d; transition: transform 0.12s ease-out;
         }
-        .profile-wrap {
-            display: inline-block; position: relative; margin-bottom: 1.3rem;
-            animation: floatProfile 4s ease-in-out infinite;
+        .profile-ring {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 4px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--purple), var(--cyan), var(--pink));
+            background-size: 200% 200%;
+            animation: spinBorder 4s linear infinite, floatHero 4s ease-in-out infinite;
+            margin-bottom: 1.4rem;
+            box-shadow: 0 0 35px rgba(139, 92, 246, 0.5);
+        }
+        @keyframes spinBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes floatHero {
+            0%, 100% { transform: translateY(0px) translateZ(30px); }
+            50% { transform: translateY(-10px) translateZ(45px); }
         }
         .profile-pic {
-            width: 125px; height: auto; border-radius: 50%;
-            border: 3px solid var(--cyan);
-            box-shadow: 0 0 30px rgba(139, 92, 246, 0.55);
-            display: block; background: #111;
-        }
-        @keyframes floatProfile {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            width: 120px; height: auto; min-height: 120px; border-radius: 50%;
+            display: block; background: #0d0d16; object-fit: cover;
         }
         .tag {
-            display: inline-block; background: rgba(139, 92, 246, 0.15); color: #c4b5fd;
-            padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
-            margin-bottom: 1.2rem; border: 1px solid rgba(139, 92, 246, 0.4);
-            backdrop-filter: blur(8px);
+            display: inline-block; background: rgba(56, 189, 248, 0.12); color: #7dd3fc;
+            padding: 0.42rem 1.1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 700;
+            margin-bottom: 1.2rem; border: 1px solid rgba(56, 189, 248, 0.35);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
         }
         .hero h1 {
-            font-size: clamp(2.3rem, 5.2vw, 3.8rem); font-weight: 800; line-height: 1.15;
-            margin-bottom: 1.2rem; letter-spacing: -1px;
+            font-size: clamp(2.4rem, 5.5vw, 4rem); font-weight: 900; line-height: 1.12;
+            margin-bottom: 1.2rem; letter-spacing: -1.2px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
         .hero h1 span {
-            background: linear-gradient(90deg, #c084fc, #38bdf8, #818cf8);
-            background-size: 200% auto;
+            background: linear-gradient(90deg, #c084fc, #38bdf8, #f472b6, #c084fc);
+            background-size: 300% auto;
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: shineText 4s linear infinite;
+            animation: flowGradient 4s linear infinite;
         }
-        @keyframes shineText {
-            to { background-position: 200% center; }
+        @keyframes flowGradient {
+            to { background-position: 300% center; }
         }
         .hero p { color: var(--muted); font-size: 1.12rem; max-width: 660px; margin: 0 auto 2.2rem; }
         .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
         .btn-primary {
-            background: linear-gradient(135deg, #7c3aed, #3b82f6); color: #fff;
-            padding: 0.9rem 1.9rem; border-radius: 12px; font-weight: 600;
-            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4); transition: 0.25s;
+            background: linear-gradient(135deg, #7c3aed, #2563eb); color: #fff;
+            padding: 0.95rem 2rem; border-radius: 12px; font-weight: 700;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.45); transition: 0.2s;
+            position: relative; overflow: hidden;
         }
-        .btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 32px rgba(56, 189, 248, 0.5); }
+        .btn-primary:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 14px 38px rgba(56, 189, 248, 0.65); }
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.04); color: var(--text); padding: 0.9rem 1.9rem;
-            border-radius: 12px; font-weight: 600; border: 1px solid rgba(255,255,255,0.12);
-            backdrop-filter: blur(10px); transition: 0.25s;
+            background: rgba(255, 255, 255, 0.05); color: var(--text); padding: 0.95rem 2rem;
+            border-radius: 12px; font-weight: 700; border: 1px solid rgba(255,255,255,0.15);
+            backdrop-filter: blur(12px); transition: 0.2s;
         }
-        .btn-secondary:hover { border-color: var(--cyan); transform: translateY(-3px); }
+        .btn-secondary:hover { border-color: var(--cyan); background: rgba(56, 189, 248, 0.1); transform: translateY(-3px); }
 
-        /* Animated Marquee Tools Strip */
+        /* Stats Strip */
+        .stats-bar {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem; max-width: 960px; margin: 1rem auto 3.5rem; padding: 0 8%;
+        }
+        .stat-box {
+            background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+            padding: 1.2rem; text-align: center; backdrop-filter: blur(12px);
+            transition: 0.3s;
+        }
+        .stat-box:hover { transform: translateY(-5px); border-color: var(--cyan); box-shadow: 0 10px 25px rgba(56,189,248,0.2); }
+        .stat-num {
+            font-size: 1.8rem; font-weight: 900;
+            background: linear-gradient(90deg, #a78bfa, #38bdf8);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .stat-label { font-size: 0.82rem; color: var(--muted); font-weight: 600; margin-top: 2px; }
+
+        /* Infinite Marquee */
         .marquee-wrap {
-            overflow: hidden; border-top: 1px solid rgba(255,255,255,0.07);
-            border-bottom: 1px solid rgba(255,255,255,0.07);
-            background: rgba(10, 10, 18, 0.7); padding: 1.1rem 0; backdrop-filter: blur(10px);
+            overflow: hidden; border-top: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(12, 12, 22, 0.8); padding: 1.1rem 0; backdrop-filter: blur(12px);
         }
         .marquee {
-            display: flex; gap: 2rem; width: max-content;
-            animation: scrollTools 18s linear infinite;
+            display: flex; gap: 1.8rem; width: max-content;
+            animation: scrollTools 16s linear infinite;
         }
+        .marquee:hover { animation-play-state: paused; }
         .tool-pill {
-            background: rgba(255,255,255,0.04); border: 1px solid rgba(139, 92, 246, 0.3);
-            padding: 0.45rem 1.1rem; border-radius: 8px; font-size: 0.88rem;
-            color: #e2e8f0; font-weight: 600; white-space: nowrap;
+            background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.35);
+            padding: 0.5rem 1.2rem; border-radius: 10px; font-size: 0.88rem;
+            color: #e2e8f0; font-weight: 700; white-space: nowrap;
         }
         @keyframes scrollTools {
             0% { transform: translateX(0); }
@@ -145,119 +175,145 @@
         }
 
         /* Portfolio Section */
-        .section { padding: 4.5rem 8%; max-width: 1220px; margin: 0 auto; }
+        .section { padding: 4.5rem 8%; max-width: 1240px; margin: 0 auto; }
         .section-header { text-align: center; margin-bottom: 2.5rem; }
-        .section-header h2 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        .section-header h2 { font-size: 2.3rem; font-weight: 800; margin-bottom: 0.5rem; }
         .section-header p { color: var(--muted); }
 
-        /* Filter Tabs */
         .filters { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
         .filter-btn {
             background: rgba(255,255,255,0.04); color: var(--muted);
-            border: 1px solid rgba(255,255,255,0.1); padding: 0.65rem 1.3rem;
-            border-radius: 10px; cursor: pointer; font-weight: 600; transition: 0.25s;
+            border: 1px solid rgba(255,255,255,0.12); padding: 0.65rem 1.4rem;
+            border-radius: 10px; cursor: pointer; font-weight: 700; transition: 0.25s;
         }
         .filter-btn.active, .filter-btn:hover {
             background: linear-gradient(135deg, #7c3aed, #2563eb); color: #fff;
-            border-color: transparent; box-shadow: 0 4px 18px rgba(124, 58, 237, 0.45);
+            border-color: transparent; box-shadow: 0 6px 22px rgba(124, 58, 237, 0.5);
         }
 
-        /* 3D Tilt Cards */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 2rem; }
+        /* 4D Holographic Tilt Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
         .card {
-            background: var(--card); border: 1px solid var(--border); border-radius: 16px;
-            overflow: hidden; backdrop-filter: blur(14px);
-            transform-style: preserve-3d; transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+            background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+            overflow: hidden; backdrop-filter: blur(16px); position: relative;
+            transform-style: preserve-3d; transition: transform 0.12s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
         }
-        .card:hover { box-shadow: 0 20px 40px rgba(124, 58, 237, 0.25); border-color: var(--cyan); }
+        .card::before {
+            content: ""; position: absolute; inset: 0; border-radius: 18px; padding: 1.5px;
+            background: linear-gradient(135deg, rgba(139,92,246,0.5), rgba(56,189,248,0.5), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+        }
+        .card:hover { box-shadow: 0 25px 50px rgba(56, 189, 248, 0.22); border-color: var(--cyan); }
         .video-box { position: relative; width: 100%; padding-top: 56.25%; background: #020205; }
         .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        .card-body { padding: 1.4rem; }
-        .card-cat { font-size: 0.75rem; color: var(--cyan); font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
-        .card-body h3 { font-size: 1.2rem; margin: 0.35rem 0 0.5rem; }
+        .card-body { padding: 1.5rem; transform: translateZ(20px); }
+        .card-cat { font-size: 0.75rem; color: var(--cyan); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        .card-body h3 { font-size: 1.25rem; margin: 0.35rem 0 0.5rem; }
         .card-body p { color: var(--muted); font-size: 0.92rem; }
 
-        /* Services */
+        /* Process / Workflow Cards */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.6rem; }
         .service-card {
-            background: var(--card); border: 1px solid var(--border); padding: 1.9rem;
-            border-radius: 16px; backdrop-filter: blur(12px);
-            transition: transform 0.2s ease, border-color 0.3s ease;
+            background: var(--card); border: 1px solid var(--border); padding: 2rem;
+            border-radius: 18px; backdrop-filter: blur(14px);
+            transform-style: preserve-3d; transition: transform 0.15s ease-out, border-color 0.3s ease;
         }
-        .service-card:hover { transform: translateY(-6px); border-color: var(--cyan); }
-        .service-card h3 { margin-bottom: 0.6rem; font-size: 1.22rem; color: #f1f5f9; }
+        .service-card:hover { border-color: var(--cyan); box-shadow: 0 18px 36px rgba(139, 92, 246, 0.22); }
+        .step-badge {
+            display: inline-block; font-size: 0.75rem; font-weight: 800; color: var(--cyan);
+            background: rgba(56,189,248,0.12); padding: 0.25rem 0.7rem; border-radius: 6px; margin-bottom: 0.8rem;
+        }
+        .service-card h3 { margin-bottom: 0.6rem; font-size: 1.25rem; color: #f1f5f9; }
         .service-card p { color: var(--muted); font-size: 0.92rem; }
 
         /* CTA */
         .cta {
-            text-align: center; background: linear-gradient(135deg, rgba(124,58,237,0.18), rgba(14,165,233,0.14));
-            border: 1px solid var(--border); border-radius: 22px; padding: 3.8rem 2rem;
-            margin: 2rem 8% 4rem; backdrop-filter: blur(16px);
+            text-align: center; background: linear-gradient(135deg, rgba(124,58,237,0.22), rgba(14,165,233,0.16));
+            border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 24px; padding: 4rem 2rem;
+            margin: 2rem 8% 4rem; backdrop-filter: blur(18px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
         }
-        .cta h2 { font-size: 2.1rem; margin-bottom: 0.8rem; }
+        .cta h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 0.8rem; }
         .cta p { color: var(--muted); max-width: 550px; margin: 0 auto 2rem; }
         .social-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
 
         /* Scroll Reveal */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s ease-out; }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal { opacity: 0; transform: translateY(35px) scale(0.98); transition: all 0.75s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal.visible { opacity: 1; transform: translateY(0) scale(1); }
 
         footer {
             text-align: center; padding: 2rem; color: var(--muted); font-size: 0.85rem;
-            border-top: 1px solid rgba(255,255,255,0.07);
+            border-top: 1px solid rgba(255,255,255,0.08);
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-canvas">
-        <div class="orb orb-1" id="orb1"></div>
-        <div class="orb orb-2" id="orb2"></div>
-        <div class="orb orb-3" id="orb3"></div>
-    </div>
-    <div class="grid-bg"></div>
+    <canvas id="particleCanvas"></canvas>
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="cyber-grid"></div>
 
     <nav>
-        <div class="logo">Ahsan<span>Edits</span></div>
+        <div class="logo"><div class="logo-dot"></div>Ahsan<span>Edits</span></div>
         <a href="#contact" class="nav-btn">Hire Me</a>
     </nav>
 
     <section class="hero" id="heroPan">
-        <div class="profile-wrap">
-            <img src="profile.jpg" alt="Ahsan" class="profile-pic">
+        <div class="profile-ring">
+            <img src="profile.jpg" alt="Ahsan" class="profile-pic" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22 viewBox=%220 0 120 120%22><rect width=%22120%22 height=%22120%22 fill=%22%230f0f1a%22/><text x=%2250%25%22 y=%2254%25%22 font-family=%22sans-serif%22 font-size=%2242%22 font-weight=%22bold%22 fill=%22%2338bdf8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22>AE</text></svg>'">
         </div>
         <br>
-        <div class="tag">Available for Freelance & Brand Projects</div>
+        <div class="tag">⚡ Available for Freelance & Brand Campaigns</div>
         <h1>High-Converting <span>Direct Response Ads</span>, AI UGC & Pixar-Style 3D</h1>
-        <p>I help brands, creators, and businesses turn views into customers with scroll-stopping hooks, realistic AI UGC commercials, and custom 3D Pixar-style animations.</p>
+        <p>I engineer scroll-stopping video ads, hyper-realistic AI UGC commercials, and custom Pixar-style 3D animations built to maximize retention and sales.</p>
         <div class="hero-btns">
-            <a href="#work" class="btn-primary">Watch My Work</a>
-            <a href="mailto:ahsanhereyt@gmail.com" class="btn-secondary">Email Me</a>
+            <a href="#work" class="btn-primary magnetic">Watch My Work</a>
+            <a href="mailto:ahsanhereyt@gmail.com" class="btn-secondary magnetic">Email Me</a>
         </div>
     </section>
 
+    <div class="stats-bar reveal">
+        <div class="stat-box">
+            <div class="stat-num">3-Sec</div>
+            <div class="stat-label">Scroll-Stopping Hooks</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-num">4D / 3D</div>
+            <div class="stat-label">Pixar-Style Visuals</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-num">AI UGC</div>
+            <div class="stat-label">Studio Voice & Video</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-num">Fast</div>
+            <div class="stat-label">Ad-Ready Delivery</div>
+        </div>
+    </div>
+
     <div class="marquee-wrap">
         <div class="marquee">
-            <div class="tool-pill">Adobe Premiere Pro</div>
-            <div class="tool-pill">Adobe After Effects</div>
-            <div class="tool-pill">Google Flow (Veo 3)</div>
-            <div class="tool-pill">ElevenLabs AI Voice</div>
-            <div class="tool-pill">3D Pixar-Style Animation</div>
-            <div class="tool-pill">High-Retention Hooks</div>
-            <!-- Duplicate for seamless loop -->
-            <div class="tool-pill">Adobe Premiere Pro</div>
-            <div class="tool-pill">Adobe After Effects</div>
-            <div class="tool-pill">Google Flow (Veo 3)</div>
-            <div class="tool-pill">ElevenLabs AI Voice</div>
-            <div class="tool-pill">3D Pixar-Style Animation</div>
-            <div class="tool-pill">High-Retention Hooks</div>
+            <div class="tool-pill">🎬 Adobe Premiere Pro</div>
+            <div class="tool-pill">✨ Adobe After Effects</div>
+            <div class="tool-pill">🤖 Google Flow (Veo 3)</div>
+            <div class="tool-pill">🎙️ ElevenLabs AI Voice</div>
+            <div class="tool-pill">🧸 3D Pixar-Style Animation</div>
+            <div class="tool-pill">📈 Direct Response Hooks</div>
+            <!-- Duplicate -->
+            <div class="tool-pill">🎬 Adobe Premiere Pro</div>
+            <div class="tool-pill">✨ Adobe After Effects</div>
+            <div class="tool-pill">🤖 Google Flow (Veo 3)</div>
+            <div class="tool-pill">🎙️ ElevenLabs AI Voice</div>
+            <div class="tool-pill">🧸 3D Pixar-Style Animation</div>
+            <div class="tool-pill">📈 Direct Response Hooks</div>
         </div>
     </div>
 
     <section class="section reveal" id="work">
         <div class="section-header">
             <h2>Featured Projects</h2>
-            <p>Move your cursor over cards for 3D depth & filter by category</p>
+            <p>Hover over cards for 4D tilt & filter by video style</p>
         </div>
 
         <div class="filters">
@@ -305,19 +361,22 @@
 
     <section class="section reveal">
         <div class="section-header">
-            <h2>What I Do</h2>
-            <p>Tailored video solutions designed for modern social media & paid ads</p>
+            <h2>My Creative Arsenal</h2>
+            <p>Built for brands that want attention, clicks, and conversions</p>
         </div>
         <div class="services-grid">
             <div class="service-card tilt-card">
+                <div class="step-badge">01 • PERFORMANCE</div>
                 <h3>Direct Response Video Editing</h3>
                 <p>Scroll-stopping TikTok, Reels, and YouTube ads with strong 3-second hooks, dynamic pacing, and conversion-focused CTAs.</p>
             </div>
             <div class="service-card tilt-card">
+                <div class="step-badge">02 • AI COMMERCIALS</div>
                 <h3>AI UGC & Commercial Reels</h3>
                 <p>Cost-effective, hyper-realistic UGC ads using AI video generation and studio-grade voiceovers without expensive shoots.</p>
             </div>
             <div class="service-card tilt-card">
+                <div class="step-badge">03 • 3D STORYTELLING</div>
                 <h3>Pixar-Style 3D Animation</h3>
                 <p>Eye-catching 3D animated promos, explainer reels, and mascot storytelling that stand out in crowded feeds.</p>
             </div>
@@ -328,14 +387,14 @@
         <h2>Ready to Scale Your Content?</h2>
         <p>Send me your raw footage or product idea, and let's create high-performing videos for your brand.</p>
         <div class="social-links">
-            <a href="mailto:ahsanhereyt@gmail.com" class="btn-primary">ahsanhereyt@gmail.com</a>
-            <a href="https://www.linkedin.com/" target="_blank" class="btn-secondary">Connect on LinkedIn</a>
-            <a href="https://www.behance.net/" target="_blank" class="btn-secondary">View Behance Portfolio</a>
+            <a href="mailto:ahsanhereyt@gmail.com" class="btn-primary magnetic">ahsanhereyt@gmail.com</a>
+            <a href="https://www.linkedin.com/" target="_blank" class="btn-secondary magnetic">Connect on LinkedIn</a>
+            <a href="https://www.behance.net/" target="_blank" class="btn-secondary magnetic">View Behance Portfolio</a>
         </div>
     </section>
 
     <footer>
-        © 2026 Ahsan Edits. All rights reserved.
+        © 2026 Ahsan Edits. Engineered for High-Retention Storytelling.
     </footer>
 
     <script>
@@ -348,41 +407,118 @@
             });
         }
 
-        // 4D Parallax Pan on Mouse Move
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 2;
-            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+        // Cursor Glow & 4D Hero Pan
+        const glow = document.getElementById('cursorGlow');
+        let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
 
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            glow.style.left = mouseX + 'px';
+            glow.style.top = mouseY + 'px';
+
+            const x = (mouseX / window.innerWidth - 0.5) * 2;
+            const y = (mouseY / window.innerHeight - 0.5) * 2;
             const hero = document.getElementById('heroPan');
             if (hero) {
-                hero.style.transform = `rotateY(${x * 4}deg) rotateX(${-y * 4}deg) translate3d(${x * 10}px, ${y * 10}px, 0)`;
+                hero.style.transform = `rotateY(${x * 5}deg) rotateX(${-y * 5}deg) translate3d(${x * 14}px, ${y * 14}px, 0)`;
             }
-
-            document.getElementById('orb1').style.transform = `translate(${x * -35}px, ${y * -35}px)`;
-            document.getElementById('orb2').style.transform = `translate(${x * 35}px, ${y * 35}px)`;
-            document.getElementById('orb3').style.transform = `translate(${x * -20}px, ${y * 25}px)`;
         });
 
-        // 3D Tilt Effect on Cards
+        // 4D Holographic Tilt on Cards
         document.querySelectorAll('.tilt-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = (e.clientX - rect.left) / rect.width - 0.5;
                 const y = (e.clientY - rect.top) / rect.height - 0.5;
-                card.style.transform = `perspective(900px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) scale3d(1.02, 1.02, 1.02)`;
+                card.style.transform = `perspective(900px) rotateY(${x * 15}deg) rotateX(${-y * 15}deg) scale3d(1.03, 1.03, 1.03)`;
             });
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
             });
         });
 
-        // Scroll Reveal Animation
+        // Magnetic Buttons
+        document.querySelectorAll('.magnetic').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = (e.clientX - rect.left - rect.width / 2) * 0.25;
+                const y = (e.clientY - rect.top - rect.height / 2) * 0.25;
+                btn.style.transform = `translate(${x}px, ${y}px) scale(1.04)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0) scale(1)';
+            });
+        });
+
+        // Scroll Reveal
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.12 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Interactive 3D Particle Network Background
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        for (let i = 0; i < 65; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.6,
+                vy: (Math.random() - 0.5) * 0.6,
+                size: Math.random() * 2 + 1
+            });
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, idx) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                // Subtle attraction to mouse
+                const dxMouse = mouseX - p.x;
+                const dyMouse = mouseY - p.y;
+                const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+                if (distMouse < 180) {
+                    p.x -= dxMouse * 0.008;
+                    p.y -= dyMouse * 0.008;
+                }
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(56, 189, 248, 0.65)';
+                ctx.fill();
+
+                for (let j = idx + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(139, 92, 246, ${0.22 * (1 - dist / 120)})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
     </script>
 </body>
 </html>
