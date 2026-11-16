@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Muhammad Ahsan — AI Video (Veo 3.1, Imagen 3) & Premiere Pro Studio</title>
+  <title>Muhammad Ahsan — AI Video & Premiere Pro Editor</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,17 +20,15 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* =========================================
-       3D DARK CINEMATIC CLOUDS FLY-THROUGH INTRO
-       ========================================= */
+    /* 3D Dark Clouds Fly-Through Intro */
     #cloud-intro {
       position: fixed;
       inset: 0;
       z-index: 9999;
       perspective: 1000px;
-      background: radial-gradient(circle at center, #1e1b4b 0%, #050508 100%);
+      background: radial-gradient(circle at center, #14122b 0%, #050508 100%);
       overflow: hidden;
-      transition: opacity 0.8s ease, visibility 0.8s;
+      transition: opacity 0.75s ease, visibility 0.75s;
     }
 
     #cloud-intro.done {
@@ -44,12 +42,12 @@
       border-radius: 9999px;
       background: radial-gradient(
         circle at 35% 30%,
-        rgba(129, 140, 248, 0.45) 0%,
-        rgba(30, 27, 75, 0.85) 55%,
+        rgba(129, 140, 248, 0.35) 0%,
+        rgba(20, 18, 45, 0.88) 55%,
         rgba(5, 5, 8, 0) 100%
       );
       filter: blur(22px);
-      box-shadow: 0 25px 70px rgba(99, 102, 241, 0.35);
+      box-shadow: 0 25px 70px rgba(99, 102, 241, 0.25);
     }
 
     .c-main {
@@ -57,7 +55,7 @@
       height: 75vh;
       top: 12%;
       left: 2.5%;
-      animation: cloudZoomOut 1.6s cubic-bezier(0.55, 0.05, 0.68, 0.19) forwards;
+      animation: cloudZoomOut 1.45s cubic-bezier(0.55, 0.05, 0.68, 0.19) forwards;
     }
 
     .c-left {
@@ -65,7 +63,7 @@
       height: 75vh;
       top: 10%;
       left: -18%;
-      animation: cloudPartLeft 1.55s cubic-bezier(0.5, 0.05, 0.7, 0.2) forwards;
+      animation: cloudPartLeft 1.4s cubic-bezier(0.5, 0.05, 0.7, 0.2) forwards;
     }
 
     .c-right {
@@ -73,7 +71,7 @@
       height: 75vh;
       top: 10%;
       right: -18%;
-      animation: cloudPartRight 1.55s cubic-bezier(0.5, 0.05, 0.7, 0.2) forwards;
+      animation: cloudPartRight 1.4s cubic-bezier(0.5, 0.05, 0.7, 0.2) forwards;
     }
 
     @keyframes cloudZoomOut {
@@ -91,9 +89,7 @@
       100% { transform: translate3d(65vw, -5vh, 800px) scale(2.3); opacity: 0; }
     }
 
-    /* =========================================
-       DARK MOTIONSITES.AI 3D CARD & MARQUEE
-       ========================================= */
+    /* Interactive 3D Aura Card */
     .perspective-stage {
       perspective: 1400px;
     }
@@ -102,14 +98,15 @@
       transform-style: preserve-3d;
       transition: transform 0.18s ease-out, box-shadow 0.3s ease;
       box-shadow:
-        0 35px 80px -15px rgba(99, 102, 241, 0.45),
-        0 0 40px rgba(56, 189, 248, 0.2);
+        0 30px 90px -15px rgba(99, 102, 241, 0.42),
+        0 0 45px rgba(34, 211, 238, 0.16);
     }
 
     .tilt-card-inner {
-      transform: translateZ(35px);
+      transform: translateZ(30px);
     }
 
+    /* Kinetic Background Text */
     @keyframes marqueeLeft {
       0% { transform: translateX(0%); }
       100% { transform: translateX(-50%); }
@@ -118,49 +115,27 @@
     .kinetic-track {
       display: flex;
       width: max-content;
-      animation: marqueeLeft 24s linear infinite;
+      animation: marqueeLeft 26s linear infinite;
     }
 
-    /* Glowing 3D Energy Vortex */
-    .energy-vortex {
-      position: relative;
-      background: radial-gradient(circle at center, #1e1b4b 0%, #050508 72%);
-      overflow: hidden;
-    }
-
-    .vortex-ring {
-      position: absolute;
-      border-radius: 9999px;
-      border: 2px solid rgba(139, 92, 246, 0.45);
-      box-shadow:
-        0 0 60px rgba(99, 102, 241, 0.55),
-        inset 0 0 50px rgba(56, 189, 248, 0.45);
-      animation: pulseVortex 7s ease-in-out infinite alternate;
-    }
-
-    @keyframes pulseVortex {
-      0% { transform: translate(-50%, -50%) scale(0.92) rotate(0deg); }
-      100% { transform: translate(-50%, -50%) scale(1.12) rotate(25deg); }
-    }
-
-    /* Dark Glass Bento Cards */
-    .dark-bento {
-      background: linear-gradient(145deg, rgba(22, 22, 30, 0.85), rgba(10, 10, 15, 0.95));
-      border: 1px solid rgba(255, 255, 255, 0.09);
+    /* Dark Glass Cards */
+    .aura-card {
+      background: linear-gradient(145deg, rgba(20, 20, 28, 0.8), rgba(9, 9, 13, 0.95));
+      border: 1px solid rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(20px);
       transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
     }
 
-    .dark-bento:hover {
-      transform: translateY(-6px);
-      border-color: rgba(129, 140, 248, 0.55);
-      box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.3);
+    .aura-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(129, 140, 248, 0.45);
+      box-shadow: 0 24px 48px -12px rgba(99, 102, 241, 0.25);
     }
 
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(20px);
+      transition: all 0.75s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     body.ready .reveal {
@@ -171,249 +146,175 @@
 </head>
 <body class="antialiased selection:bg-indigo-500 selection:text-white">
 
-  <!-- 3D DARK CLOUDS INTRO -->
+  <!-- 3D CLOUDS INTRO -->
   <div id="cloud-intro" aria-hidden="true">
     <div class="cloud-puff c-left"></div>
     <div class="cloud-puff c-right"></div>
     <div class="cloud-puff c-main"></div>
   </div>
 
-  <!-- FLOATING DARK PILL NAVBAR -->
+  <!-- FLOATING NAVBAR -->
   <header class="fixed top-5 inset-x-0 z-50 px-4">
-    <div class="max-w-3xl mx-auto bg-zinc-900/75 backdrop-blur-xl border border-white/10 shadow-[0_12px_32px_-8px_rgba(0,0,0,0.65)] rounded-full px-4 py-2 flex items-center justify-between">
+    <div class="max-w-3xl mx-auto bg-zinc-900/75 backdrop-blur-xl border border-white/10 shadow-[0_12px_32px_-8px_rgba(0,0,0,0.7)] rounded-full px-4 py-2 flex items-center justify-between">
       <a href="#" class="flex items-center gap-2.5 pl-1">
         <img src="./ahsan.jpg" onerror="this.onerror=null;this.src='./ahsan.jpeg';" alt="Muhammad Ahsan" class="w-8 h-8 rounded-full object-cover border border-indigo-400/50" />
         <span class="font-extrabold text-sm tracking-tight text-white">
-          Ahsan<span class="text-indigo-400">.studio</span>
+          Muhammad <span class="text-indigo-400">Ahsan</span>
         </span>
       </a>
 
       <nav class="hidden sm:flex items-center gap-6 text-xs font-semibold text-zinc-400">
         <a href="#work" class="hover:text-white transition">Work</a>
-        <a href="#engine" class="hover:text-white transition">Google Flow AI</a>
         <a href="#services" class="hover:text-white transition">Services</a>
+        <a href="#contact" class="hover:text-white transition">Contact</a>
       </nav>
 
-      <a href="#contact" class="px-4 py-2 rounded-full bg-white text-zinc-950 text-xs font-bold hover:bg-indigo-400 hover:text-zinc-950 transition">
-        Get Started
+      <a href="#contact" class="px-4 py-2 rounded-full bg-white text-zinc-950 text-xs font-bold hover:bg-indigo-400 transition">
+        Hire Me
       </a>
     </div>
   </header>
 
-  <!-- =========================================================
-       PART 1: FULL DARK HERO + 3D FLOATING CARD + KINETIC TEXT
-       ========================================================= -->
-  <section class="relative min-h-screen pt-32 pb-24 flex flex-col justify-between overflow-hidden bg-[#050508]">
-    <!-- Subtle Dark Architectural Grid & Ambient Glow -->
-    <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_65%_55%_at_50%_45%,#000_60%,transparent_100%)] pointer-events-none"></div>
-    <div class="absolute top-24 left-1/2 -translate-x-1/2 w-[520px] h-[320px] bg-indigo-600/20 blur-[130px] rounded-full pointer-events-none"></div>
+  <!-- HERO SECTION -->
+  <section class="relative min-h-screen pt-32 pb-20 flex flex-col justify-between overflow-hidden bg-[#050508]">
+    <!-- Subtle Grid & Aura Glow -->
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_65%_55%_at_50%_45%,#000_60%,transparent_100%)] pointer-events-none"></div>
+    <div class="absolute top-28 left-1/2 -translate-x-1/2 w-[540px] h-[340px] bg-indigo-600/20 blur-[140px] rounded-full pointer-events-none"></div>
 
-    <!-- Top Center Headline -->
-    <div class="max-w-5xl mx-auto px-5 text-center relative z-10 reveal">
+    <!-- Top Headline -->
+    <div class="max-w-4xl mx-auto px-5 text-center relative z-10 reveal">
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-zinc-300 mb-6">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        AI Video Director & Premiere Pro Editor
+        Available for Video Editing & AI Ad Projects
       </div>
 
-      <h1 class="text-4xl sm:text-6xl lg:text-[4.5rem] font-extrabold tracking-tight leading-[1.03] text-white">
-        AI Video that <span class="bg-gradient-to-r from-indigo-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent">sells</span> <br class="hidden sm:block" />
-        without limits.
+      <h1 class="text-4xl sm:text-6xl lg:text-[4.25rem] font-extrabold tracking-tight leading-[1.05] text-white">
+        High-Converting <br />
+        <span class="bg-gradient-to-r from-indigo-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent">
+          AI Video & Direct Response
+        </span> Edits.
       </h1>
 
       <p class="mt-5 text-zinc-400 text-base sm:text-lg max-w-xl mx-auto font-medium leading-relaxed">
-        I’m <strong class="text-white">Muhammad Ahsan</strong> — crafting high-converting AI UGC ads, 3D Pixar-style stories, and retention-driven edits using <strong class="text-zinc-200">Google Flow & Premiere Pro</strong>.
+        Hi, I’m <strong class="text-white">Muhammad Ahsan</strong>. I create scroll-stopping AI UGC ads, 3D Pixar-style animations, and clean, fast-paced edits in <strong class="text-zinc-200">Premiere Pro</strong>.
       </p>
     </div>
 
-    <!-- Center Interactive 3D Floating Card + Giant Kinetic Text Behind -->
+    <!-- Center 3D Aura Profile Card -->
     <div class="relative my-12 flex items-center justify-center">
-      <!-- Giant Kinetic Scrolling Text Behind Card -->
-      <div class="absolute inset-x-0 overflow-hidden pointer-events-none select-none opacity-[0.06]">
-        <div class="kinetic-track text-[6.5rem] sm:text-[10rem] font-extrabold uppercase tracking-tighter text-white whitespace-nowrap">
-          <span>AI UGC ADS • 3D PIXAR • VEO 3.1 • PREMIERE PRO • DIRECT RESPONSE •&nbsp;</span>
-          <span>AI UGC ADS • 3D PIXAR • VEO 3.1 • PREMIERE PRO • DIRECT RESPONSE •&nbsp;</span>
+      <!-- Subtle Scrolling Text Behind -->
+      <div class="absolute inset-x-0 overflow-hidden pointer-events-none select-none opacity-[0.05]">
+        <div class="kinetic-track text-[6rem] sm:text-[9.5rem] font-extrabold uppercase tracking-tighter text-white whitespace-nowrap">
+          <span>AI UGC ADS • 3D PIXAR • DIRECT RESPONSE • PREMIERE PRO •&nbsp;</span>
+          <span>AI UGC ADS • 3D PIXAR • DIRECT RESPONSE • PREMIERE PRO •&nbsp;</span>
         </div>
       </div>
 
-      <!-- Interactive 3D Tilt Flagship Card -->
+      <!-- 3D Tilt Card -->
       <div class="perspective-stage px-5 relative z-20">
-        <div id="hero-3d-card" class="tilt-card w-[310px] sm:w-[370px] rounded-[2rem] bg-gradient-to-br from-indigo-600 via-violet-700 to-slate-900 p-6 sm:p-7 text-white border border-white/25 cursor-pointer">
+        <div id="hero-3d-card" class="tilt-card w-[305px] sm:w-[360px] rounded-[2rem] bg-gradient-to-br from-indigo-600/90 via-violet-800/90 to-zinc-950 p-6 sm:p-7 text-white border border-white/20 cursor-pointer">
           <div class="tilt-card-inner">
-            <!-- Card Top Row -->
-            <div class="flex items-center justify-between mb-6">
-              <span class="px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-[11px] mono font-bold tracking-wider uppercase">
-                SHOWREEL 2026
-              </span>
-              <span class="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center text-sm font-bold">
-                ✦
-              </span>
-            </div>
-
-            <!-- Creator Profile Inside 3D Card -->
-            <div class="flex items-center gap-3.5 mb-6 bg-black/35 backdrop-blur-md p-3 rounded-2xl border border-white/15">
-              <img src="./ahsan.jpg" onerror="this.onerror=null;this.src='./ahsan.jpeg';" alt="Muhammad Ahsan" class="w-12 h-12 rounded-xl object-cover object-top border border-white/40" />
+            <!-- Profile Header -->
+            <div class="flex items-center gap-3.5 mb-5">
+              <img src="./ahsan.jpg" onerror="this.onerror=null;this.src='./ahsan.jpeg';" alt="Muhammad Ahsan" class="w-14 h-14 rounded-2xl object-cover object-top border-2 border-white/30 shadow-lg" />
               <div>
-                <p class="font-extrabold text-sm text-white">Muhammad Ahsan</p>
-                <p class="text-[11px] text-indigo-200">Veo 3.1 • Imagen 3 • Premiere Pro</p>
+                <h2 class="font-extrabold text-lg text-white leading-tight">Muhammad Ahsan</h2>
+                <p class="text-xs text-indigo-200 mt-0.5">AI Video & Premiere Pro Editor</p>
               </div>
             </div>
 
-            <!-- Card Headline -->
-            <h2 class="text-2xl sm:text-3xl font-extrabold leading-tight tracking-tight mb-3">
-              Intelligence, <br />beyond limits.
-            </h2>
-            <p class="text-xs text-indigo-100/85 leading-relaxed mb-6">
-              Scroll-stopping AI spokespersons, 3D animated stories & fast-paced direct response ads engineered for maximum ROAS.
+            <p class="text-xs sm:text-sm text-zinc-200/90 leading-relaxed mb-5">
+              Turning scripts and raw ideas into retention-driven video ads using <span class="text-white font-semibold">Veo 3.1, Veo 3, Omni, Flash</span> & <span class="text-white font-semibold">Premiere Pro</span>.
             </p>
 
-            <!-- Card CTA -->
+            <!-- Clean Tool Pills -->
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="px-2.5 py-1 rounded-lg bg-black/30 border border-white/10 text-[11px] mono text-indigo-200">Premiere Pro</span>
+              <span class="px-2.5 py-1 rounded-lg bg-black/30 border border-white/10 text-[11px] mono text-indigo-200">Veo 3 / 3.1</span>
+              <span class="px-2.5 py-1 rounded-lg bg-black/30 border border-white/10 text-[11px] mono text-indigo-200">Omni & Flash</span>
+            </div>
+
             <a href="#work" class="w-full py-3 rounded-xl bg-white text-zinc-950 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 hover:bg-indigo-100 transition shadow-lg">
-              Explore Featured Work →
+              View My Work →
             </a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Bottom Tech Strip -->
-    <div class="max-w-5xl mx-auto px-5 w-full relative z-10">
-      <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-12 text-xs mono font-bold uppercase tracking-widest text-zinc-500">
-        <span>VEO 3.1</span>
-        <span>•</span>
-        <span>VEO 3 / FAST</span>
-        <span>•</span>
-        <span>IMAGEN 3</span>
-        <span>•</span>
-        <span>OMNI & FLASH</span>
-        <span>•</span>
-        <span>PREMIERE PRO</span>
-      </div>
+    <!-- Subtle Bottom Line -->
+    <div class="max-w-4xl mx-auto px-5 text-center relative z-10">
+      <p class="text-xs mono tracking-widest uppercase text-zinc-500">
+        AI UGC • Direct Response • 3D Pixar-Style Storytelling
+      </p>
     </div>
   </section>
 
-  <!-- =========================================================
-       PART 2: DEEP CINEMATIC ENERGY VORTEX + GOOGLE FLOW MODELS
-       ========================================================= -->
-  <section id="engine" class="energy-vortex py-28 text-white relative border-t border-white/10">
-    <div class="vortex-ring w-[340px] h-[340px] sm:w-[540px] sm:h-[540px] top-1/2 left-1/2 pointer-events-none"></div>
-    <div class="vortex-ring w-[220px] h-[220px] sm:w-[360px] sm:h-[360px] top-1/2 left-1/2 pointer-events-none" style="animation-delay: -2s; border-color: rgba(56, 189, 248, 0.5);"></div>
-
-    <div class="max-w-6xl mx-auto px-5 relative z-10">
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="mono text-xs font-bold uppercase tracking-widest text-indigo-400">Google Flow AI Stack</span>
-        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mt-3">
-          Next-Gen Models. <br />
-          <span class="bg-gradient-to-r from-indigo-400 via-sky-300 to-purple-400 bg-clip-text text-transparent">
-            Zero Production Bottlenecks.
-          </span>
-        </h2>
-        <p class="text-zinc-400 text-sm sm:text-base mt-4">
-          Combining Google Flow’s top video & image models with precision Premiere Pro editing to deliver studio-grade ads in record time.
-        </p>
+  <!-- FEATURED WORK SECTION -->
+  <section id="work" class="bg-[#050508] text-white py-20 border-t border-white/10">
+    <div class="max-w-5xl mx-auto px-5">
+      <div class="mb-12">
+        <span class="mono text-xs font-bold uppercase tracking-widest text-indigo-400">Portfolio</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-2">Featured Projects</h2>
       </div>
 
-      <!-- 6 AI Models Grid -->
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-        <div class="dark-bento rounded-2xl p-5 text-center">
-          <p class="text-indigo-400 font-extrabold text-base">Veo 3.1</p>
-          <p class="text-[11px] text-zinc-400 mt-1">Flagship Cinema Video</p>
-        </div>
-        <div class="dark-bento rounded-2xl p-5 text-center">
-          <p class="text-sky-400 font-extrabold text-base">Veo 3 / Fast</p>
-          <p class="text-[11px] text-zinc-400 mt-1">Native Audio & Lip-Sync</p>
-        </div>
-        <div class="dark-bento rounded-2xl p-5 text-center">
-          <p class="text-purple-400 font-extrabold text-base">Veo 2</p>
-          <p class="text-[11px] text-zinc-400 mt-1">Camera & Physics Control</p>
-        </div>
-        <div class="dark-bento rounded-2xl p-5 text-center">
-          <p class="text-cyan-400 font-extrabold text-base">Imagen 3</p>
-          <p class="text-[11px] text-zinc-400 mt-1">Photoreal Keyframes</p>
-        </div>
-        <div class="dark-bento rounded-2xl p-5 text-center">
-          <p class="text-fuchsia-400 font-extrabold text-base">Omni Models</p>
-          <p class="text-[11px] text-zinc-400 mt-1">Character Consistency</p>
-        </div>
-        <div class="dark-bento rounded-2xl p-5 text-center">
-          <p class="text-emerald-400 font-extrabold text-base">Flash Models</p>
-          <p class="text-[11px] text-zinc-400 mt-1">Rapid Hook Variations</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================
-       PART 3: FEATURED PORTFOLIO SHOWCASE (DARK BENTO GRID)
-       ========================================================= -->
-  <section id="work" class="bg-[#050508] text-white py-24 border-t border-white/10">
-    <div class="max-w-6xl mx-auto px-5">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-14 gap-4">
-        <div>
-          <span class="mono text-xs font-bold uppercase tracking-widest text-indigo-400">Selected Portfolio</span>
-          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mt-2">Recent Campaigns</h2>
-        </div>
-        <p class="text-sm text-zinc-400 max-w-md">
-          Built for thumb-stopping 3-second hooks, crisp storytelling, and measurable conversions.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-7">
-        <!-- Card 1 -->
-        <div class="dark-bento rounded-3xl p-4 flex flex-col">
-          <div class="aspect-[9/13] rounded-2xl bg-gradient-to-br from-indigo-900/60 via-zinc-900 to-black border border-white/10 flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Project 1 -->
+        <div class="aura-card rounded-3xl p-4 flex flex-col">
+          <div class="aspect-[9/13] rounded-2xl bg-gradient-to-br from-indigo-950/70 via-zinc-900 to-black border border-white/10 flex flex-col items-center justify-center p-6 text-center">
             <span class="px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-[11px] mono font-bold">
               AI UGC AD
             </span>
-            <h3 class="text-2xl font-extrabold mt-4">Skincare Brand UGC</h3>
-            <p class="text-xs text-zinc-400 mt-1.5">SerlinoLab • Veo 3.1 & Imagen 3</p>
-            <a href="mailto:ahsanhereyt@gmail.com?subject=AI%20UGC%20Demo%20Request" class="mt-6 px-5 py-2.5 rounded-full bg-white text-zinc-950 text-xs font-extrabold hover:bg-indigo-400 transition">
-              ▶ Watch / Request Sample
+            <h3 class="text-xl font-extrabold mt-4">Skincare Brand UGC</h3>
+            <p class="text-xs text-zinc-400 mt-1">SerlinoLab • Problem-Solution Hook</p>
+            <a href="mailto:ahsanhereyt@gmail.com?subject=AI%20UGC%20Sample%20Request" class="mt-6 px-5 py-2.5 rounded-full bg-white text-zinc-950 text-xs font-extrabold hover:bg-indigo-400 transition">
+              ▶ Request Sample
             </a>
           </div>
-          <div class="pt-5 px-2 pb-2">
-            <h4 class="font-bold text-lg">Direct Response AI UGC</h4>
-            <p class="text-xs text-zinc-400 mt-1.5 leading-relaxed">
-              Lifelike AI spokesperson created with Veo 3.1 & Omni, edited with dynamic captions and B-roll in Premiere Pro.
+          <div class="pt-4 px-2 pb-1">
+            <h4 class="font-bold text-base">Direct Response AI UGC</h4>
+            <p class="text-xs text-zinc-400 mt-1 leading-relaxed">
+              Realistic AI spokesperson generated with Veo 3.1 & Omni, cut with sharp captions and B-roll in Premiere Pro.
             </p>
           </div>
         </div>
 
-        <!-- Card 2 -->
-        <div class="dark-bento rounded-3xl p-4 flex flex-col">
-          <div class="aspect-[9/13] rounded-2xl bg-gradient-to-br from-sky-900/60 via-zinc-900 to-black border border-white/10 flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
-            <span class="px-3 py-1 rounded-full bg-sky-500/20 border border-sky-400/30 text-sky-300 text-[11px] mono font-bold">
+        <!-- Project 2 -->
+        <div class="aura-card rounded-3xl p-4 flex flex-col">
+          <div class="aspect-[9/13] rounded-2xl bg-gradient-to-br from-cyan-950/70 via-zinc-900 to-black border border-white/10 flex flex-col items-center justify-center p-6 text-center">
+            <span class="px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 text-[11px] mono font-bold">
               3D PIXAR STYLE
             </span>
-            <h3 class="text-2xl font-extrabold mt-4">3D Character Story</h3>
-            <p class="text-xs text-zinc-400 mt-1.5">Imagen 3 Keyframes • Veo 3 Lip-Sync</p>
-            <a href="mailto:ahsanhereyt@gmail.com?subject=3D%20Pixar%20Animation%20Demo%20Request" class="mt-6 px-5 py-2.5 rounded-full bg-white text-zinc-950 text-xs font-extrabold hover:bg-sky-400 transition">
-              ▶ Watch / Request Sample
+            <h3 class="text-xl font-extrabold mt-4">3D Character Story</h3>
+            <p class="text-xs text-zinc-400 mt-1">Lip-Sync & Custom Voiceover</p>
+            <a href="mailto:ahsanhereyt@gmail.com?subject=3D%20Animation%20Sample%20Request" class="mt-6 px-5 py-2.5 rounded-full bg-white text-zinc-950 text-xs font-extrabold hover:bg-cyan-400 transition">
+              ▶ Request Sample
             </a>
           </div>
-          <div class="pt-5 px-2 pb-2">
-            <h4 class="font-bold text-lg">3D Stylized Commercials</h4>
-            <p class="text-xs text-zinc-400 mt-1.5 leading-relaxed">
-              Expressive 3D Pixar-inspired characters, consistent scene flow, custom voiceovers, and cinematic pacing.
+          <div class="pt-4 px-2 pb-1">
+            <h4 class="font-bold text-base">3D Stylized Commercials</h4>
+            <p class="text-xs text-zinc-400 mt-1 leading-relaxed">
+              Expressive 3D animated characters with consistent scenes, natural voiceovers, and smooth pacing.
             </p>
           </div>
         </div>
 
-        <!-- Card 3 -->
-        <div class="dark-bento rounded-3xl p-4 flex flex-col">
-          <div class="aspect-[9/13] rounded-2xl bg-gradient-to-br from-purple-900/60 via-zinc-900 to-black border border-white/10 flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+        <!-- Project 3 -->
+        <div class="aura-card rounded-3xl p-4 flex flex-col">
+          <div class="aspect-[9/13] rounded-2xl bg-gradient-to-br from-purple-950/70 via-zinc-900 to-black border border-white/10 flex flex-col items-center justify-center p-6 text-center">
             <span class="px-3 py-1 rounded-full bg-purple-500/20 border border-purple-400/30 text-purple-300 text-[11px] mono font-bold">
               DIRECT RESPONSE
             </span>
-            <h3 class="text-2xl font-extrabold mt-4">High-Retention Promo</h3>
-            <p class="text-xs text-zinc-400 mt-1.5">Premiere Pro Pacing & Flash AI</p>
-            <a href="mailto:ahsanhereyt@gmail.com?subject=Direct%20Response%20Edit%20Demo%20Request" class="mt-6 px-5 py-2.5 rounded-full bg-white text-zinc-950 text-xs font-extrabold hover:bg-purple-400 transition">
-              ▶ Watch / Request Sample
+            <h3 class="text-xl font-extrabold mt-4">High-Retention Promo</h3>
+            <p class="text-xs text-zinc-400 mt-1">Premiere Pro Pacing & SFX</p>
+            <a href="mailto:ahsanhereyt@gmail.com?subject=Direct%20Response%20Sample%20Request" class="mt-6 px-5 py-2.5 rounded-full bg-white text-zinc-950 text-xs font-extrabold hover:bg-purple-400 transition">
+              ▶ Request Sample
             </a>
           </div>
-          <div class="pt-5 px-2 pb-2">
-            <h4 class="font-bold text-lg">Fast-Paced Social Ads</h4>
-            <p class="text-xs text-zinc-400 mt-1.5 leading-relaxed">
-              Pattern interrupts every 2–3 seconds, punchy SFX, and high-converting CTA end-cards cut in Premiere Pro.
+          <div class="pt-4 px-2 pb-1">
+            <h4 class="font-bold text-base">Fast-Paced Social Ads</h4>
+            <p class="text-xs text-zinc-400 mt-1 leading-relaxed">
+              Strong 3-second hooks, clean subtitles, custom sound design, and high-converting CTA endings.
             </p>
           </div>
         </div>
@@ -421,60 +322,60 @@
     </div>
   </section>
 
-  <!-- =========================================================
-       PART 4: SERVICES & CONTACT CTA
-       ========================================================= -->
+  <!-- SERVICES & CONTACT SECTION -->
   <section id="services" class="bg-[#050508] text-white py-20 border-t border-white/10">
-    <div class="max-w-6xl mx-auto px-5">
-      <div class="grid md:grid-cols-3 gap-6 mb-24">
-        <div class="dark-bento rounded-3xl p-8">
-          <span class="mono text-xs text-indigo-400 font-bold">01 / AI ADS</span>
-          <h3 class="text-xl font-extrabold mt-3 mb-2">AI UGC Video Ads</h3>
+    <div class="max-w-5xl mx-auto px-5">
+      <div class="grid md:grid-cols-3 gap-6 mb-20">
+        <div class="aura-card rounded-3xl p-7">
+          <span class="mono text-xs text-indigo-400 font-bold">01</span>
+          <h3 class="text-lg font-extrabold mt-2 mb-2">AI UGC Video Ads</h3>
           <p class="text-sm text-zinc-400 leading-relaxed">
-            Script-to-screen AI creator ads using Google Flow (Veo 3.1, Veo 3, Omni & Flash) built to scale TikTok, Meta & Reels campaigns.
+            Script-to-screen AI creator ads using Veo 3, Veo 3.1, Omni & Flash models built for TikTok, Reels, and Meta.
           </p>
         </div>
 
-        <div class="dark-bento rounded-3xl p-8">
-          <span class="mono text-xs text-sky-400 font-bold">02 / EDITING</span>
-          <h3 class="text-xl font-extrabold mt-3 mb-2">Direct Response Editing</h3>
+        <div class="aura-card rounded-3xl p-7">
+          <span class="mono text-xs text-cyan-400 font-bold">02</span>
+          <h3 class="text-lg font-extrabold mt-2 mb-2">Direct Response Editing</h3>
           <p class="text-sm text-zinc-400 leading-relaxed">
-            Retention-engineered editing in Adobe Premiere Pro with crisp cuts, dynamic captions, custom SFX, and persuasive hooks.
+            Retention-focused editing in Premiere Pro with dynamic captions, crisp cuts, and punchy sound design.
           </p>
         </div>
 
-        <div class="dark-bento rounded-3xl p-8">
-          <span class="mono text-xs text-purple-400 font-bold">03 / 3D STORY</span>
-          <h3 class="text-xl font-extrabold mt-3 mb-2">3D Pixar-Style Animations</h3>
+        <div class="aura-card rounded-3xl p-7">
+          <span class="mono text-xs text-purple-400 font-bold">03</span>
+          <h3 class="text-lg font-extrabold mt-2 mb-2">3D Pixar-Style Animations</h3>
           <p class="text-sm text-zinc-400 leading-relaxed">
-            Memorable 3D animated brand mascots and story-driven commercials crafted with Imagen 3 and Veo models.
+            Memorable 3D animated characters and brand stories designed to stand out and boost conversions.
           </p>
         </div>
       </div>
 
-      <!-- Final Contact Box -->
-      <div id="contact" class="rounded-[2.5rem] bg-gradient-to-br from-indigo-600 via-violet-700 to-zinc-950 p-10 sm:p-16 text-center border border-white/15 shadow-2xl">
-        <span class="mono text-xs uppercase tracking-widest text-indigo-200 font-bold">Ready To Launch?</span>
-        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mt-3 mb-5">
-          Let’s Build Your Next Winning Video Ad.
-        </h2>
-        <p class="text-indigo-100/85 max-w-xl mx-auto text-sm sm:text-base mb-9">
-          Send your product link, script, or raw footage — and get scroll-stopping AI video & Premiere Pro edits delivered fast.
-        </p>
+      <!-- Simple Contact Card -->
+      <div id="contact" class="aura-card rounded-[2.25rem] p-10 sm:p-14 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-indigo-600/15 via-purple-600/15 to-cyan-600/15 pointer-events-none"></div>
+        <div class="relative z-10">
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">
+            Let’s Work Together
+          </h2>
+          <p class="text-zinc-400 max-w-md mx-auto text-sm sm:text-base mb-8">
+            Send your product link, script, or raw footage—let’s create videos that convert.
+          </p>
 
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="mailto:ahsanhereyt@gmail.com?subject=Video%20Project%20Inquiry" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-zinc-950 font-extrabold text-sm hover:bg-indigo-100 transition shadow-xl">
-            Email: ahsanhereyt@gmail.com
-          </a>
-          <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm transition">
-            Connect on LinkedIn
-          </a>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="mailto:ahsanhereyt@gmail.com?subject=Video%20Project%20Inquiry" class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white text-zinc-950 font-extrabold text-sm hover:bg-indigo-400 transition shadow-lg">
+              ahsanhereyt@gmail.com
+            </a>
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-white font-bold text-sm transition">
+              LinkedIn Profile
+            </a>
+          </div>
         </div>
       </div>
 
-      <footer class="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-3">
-        <p>© 2026 Muhammad Ahsan. All rights reserved.</p>
-        <p class="mono">Google Flow AI • Premiere Pro Studio</p>
+      <footer class="mt-14 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-2">
+        <p>© 2026 Muhammad Ahsan</p>
+        <p>AI Video & Premiere Pro Editor</p>
       </footer>
     </div>
   </section>
@@ -485,10 +386,10 @@
       const cloudIntro = document.getElementById("cloud-intro");
       setTimeout(() => {
         document.body.classList.add("ready");
-      }, 700);
+      }, 650);
       setTimeout(() => {
         cloudIntro.classList.add("done");
-      }, 1550);
+      }, 1450);
 
       const card = document.getElementById("hero-3d-card");
       if (card) {
