@@ -3,126 +3,170 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Muhammad Ahsan — AI Video (Veo 3.1, Imagen 3), UGC & Premiere Pro Editor</title>
+  <title>Muhammad Ahsan — AI Video (Veo 3.1, Imagen 3) & Premiere Pro Editor</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-light: #f3f6fb;
-      --text-main: #0f172a;
-      --text-muted: #475569;
+      --mouse-x: 50%;
+      --mouse-y: 50%;
     }
 
     body {
-      background-color: var(--bg-light);
-      color: var(--text-main);
-      font-family: 'Inter', sans-serif;
+      background: #e9eff8;
+      color: #0b1120;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       overflow-x: hidden;
+      min-height: 100vh;
     }
 
     .mono {
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* Liquid Mesh Background Blobs */
-    .liquid-mesh {
+    /* Vivid Wallpaper Behind Glass (Essential for Real Apple Liquid Refraction) */
+    .apple-wallpaper {
       position: fixed;
       inset: 0;
-      z-index: -1;
-      overflow: hidden;
-      background: linear-gradient(135deg, #eef2ff 0%, #f8fafc 48%, #ecfeff 100%);
+      z-index: -2;
+      background:
+        radial-gradient(circle at 15% 20%, #818cf8 0%, transparent 42%),
+        radial-gradient(circle at 85% 18%, #38bdf8 0%, transparent 40%),
+        radial-gradient(circle at 75% 80%, #f472b6 0%, transparent 45%),
+        radial-gradient(circle at 22% 82%, #34d399 0%, transparent 42%),
+        linear-gradient(135deg, #f8fafc 0%, #e0e7ff 50%, #cffafe 100%);
+      animation: wallpaperShift 16s ease-in-out infinite alternate;
     }
 
-    .blob {
-      position: absolute;
+    @keyframes wallpaperShift {
+      0% { transform: scale(1) translate(0, 0); }
+      100% { transform: scale(1.08) translate(-1.5%, 1.5%); }
+    }
+
+    /* Floating Vivid Orbs That Bend Inside the Glass */
+    .refract-orb {
+      position: fixed;
       border-radius: 9999px;
-      filter: blur(85px);
-      opacity: 0.7;
-      animation: liquidFloat 14s ease-in-out infinite alternate;
+      z-index: -1;
+      pointer-events: none;
+      filter: blur(24px);
+      animation: orbDrift 12s ease-in-out infinite alternate;
     }
 
-    .blob-1 {
-      width: 480px;
-      height: 480px;
-      background: radial-gradient(circle, #c4b5fd, #818cf8);
-      top: -100px;
-      left: -80px;
+    @keyframes orbDrift {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(60px, -45px) scale(1.15); }
     }
 
-    .blob-2 {
-      width: 440px;
-      height: 440px;
-      background: radial-gradient(circle, #67e8f9, #38bdf8);
-      top: 25%;
-      right: -100px;
-      animation-delay: -4s;
+    /* TRUE APPLE LIQUID GLASS MATERIAL */
+    .apple-glass {
+      position: relative;
+      background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.56) 0%,
+        rgba(255, 255, 255, 0.22) 45%,
+        rgba(255, 255, 255, 0.42) 100%
+      );
+      backdrop-filter: blur(28px) saturate(210%) contrast(106%);
+      -webkit-backdrop-filter: blur(28px) saturate(210%) contrast(106%);
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      box-shadow:
+        /* Deep ambient drop shadow */
+        0 24px 48px -12px rgba(15, 23, 42, 0.14),
+        /* Top-left crisp specular highlight */
+        inset 0 2px 2px rgba(255, 255, 255, 0.98),
+        /* Inner glass thickness rim */
+        inset 0 0 18px rgba(255, 255, 255, 0.55),
+        /* Bottom chromatic caustic reflection */
+        inset 0 -2px 4px rgba(99, 102, 241, 0.22);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+      overflow: hidden;
     }
 
-    .blob-3 {
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, #fbcfe8, #c084fc);
-      bottom: -140px;
-      left: 20%;
-      animation-delay: -8s;
+    /* Dynamic Cursor Specular Glare Layer */
+    .apple-glass::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(
+        420px circle at var(--x, 50%) var(--y, 50%),
+        rgba(255, 255, 255, 0.72),
+        rgba(255, 255, 255, 0.15) 35%,
+        transparent 70%
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
     }
 
-    @keyframes liquidFloat {
-      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-      50% { transform: translate(45px, -35px) scale(1.08) rotate(8deg); }
-      100% { transform: translate(-30px, 40px) scale(0.96) rotate(-6deg); }
+    .apple-glass:hover::before {
+      opacity: 1;
     }
 
-    /* True Liquid Glass Material */
-    .liquid-glass {
+    /* Prismatic Edge Sheen */
+    .apple-glass::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.5px;
       background: linear-gradient(
         135deg,
-        rgba(255, 255, 255, 0.72) 0%,
-        rgba(255, 255, 255, 0.38) 50%,
-        rgba(255, 255, 255, 0.62) 100%
+        rgba(255, 255, 255, 1) 0%,
+        rgba(165, 180, 252, 0.55) 30%,
+        rgba(103, 232, 249, 0.55) 70%,
+        rgba(255, 255, 255, 0.95) 100%
       );
-      backdrop-filter: blur(26px) saturate(190%);
-      -webkit-backdrop-filter: blur(26px) saturate(190%);
-      border: 1px solid rgba(255, 255, 255, 0.85);
-      box-shadow:
-        0 20px 45px -15px rgba(15, 23, 42, 0.08),
-        inset 0 1.5px 1px rgba(255, 255, 255, 0.95),
-        inset 0 -1px 2px rgba(148, 163, 184, 0.15);
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 2;
     }
 
-    .liquid-glass:hover {
-      transform: translateY(-6px);
+    .apple-glass:hover {
+      transform: translateY(-5px) scale(1.008);
       box-shadow:
-        0 28px 55px -12px rgba(79, 70, 229, 0.14),
-        inset 0 2px 1.5px rgba(255, 255, 255, 1);
+        0 32px 64px -14px rgba(30, 41, 59, 0.18),
+        inset 0 2px 3px rgba(255, 255, 255, 1),
+        inset 0 0 24px rgba(255, 255, 255, 0.7);
     }
 
-    .liquid-pill {
-      background: rgba(255, 255, 255, 0.68);
-      backdrop-filter: blur(18px) saturate(180%);
-      -webkit-backdrop-filter: blur(18px) saturate(180%);
+    /* Liquid Glass Pill / Button */
+    .glass-pill {
+      position: relative;
+      background: linear-gradient(135deg, rgba(255,255,255,0.72), rgba(255,255,255,0.34));
+      backdrop-filter: blur(22px) saturate(200%);
+      -webkit-backdrop-filter: blur(22px) saturate(200%);
       border: 1px solid rgba(255, 255, 255, 0.9);
       box-shadow:
-        0 8px 24px -6px rgba(15, 23, 42, 0.07),
-        inset 0 1px 1px rgba(255, 255, 255, 1);
+        0 10px 25px -5px rgba(15, 23, 42, 0.1),
+        inset 0 1.5px 1px rgba(255, 255, 255, 1),
+        inset 0 -1px 2px rgba(56, 189, 248, 0.2);
+      transition: all 0.25s ease;
     }
 
-    /* Light Liquid Preloader */
+    .glass-pill:hover {
+      background: linear-gradient(135deg, rgba(255,255,255,0.88), rgba(255,255,255,0.52));
+      transform: translateY(-2px);
+    }
+
+    /* Liquid Glass Preloader */
     #intro-preloader {
       position: fixed;
       inset: 0;
       z-index: 9999;
-      background: rgba(244, 247, 252, 0.82);
-      backdrop-filter: blur(36px) saturate(200%);
-      -webkit-backdrop-filter: blur(36px) saturate(200%);
+      background: rgba(238, 244, 255, 0.55);
+      backdrop-filter: blur(40px) saturate(220%);
+      -webkit-backdrop-filter: blur(40px) saturate(220%);
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.6s ease;
+      transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.5s ease;
     }
 
     #intro-preloader.loaded {
@@ -130,21 +174,11 @@
       pointer-events: none;
     }
 
-    .timeline-ticks {
-      background-image: repeating-linear-gradient(
-        90deg,
-        rgba(15, 23, 42, 0.14) 0px,
-        rgba(15, 23, 42, 0.14) 1px,
-        transparent 1px,
-        transparent 12px
-      );
-    }
-
     /* Entrance Animations */
     .reveal-up {
       opacity: 0;
-      transform: translateY(28px);
-      transition: all 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(26px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     body.site-ready .reveal-up {
@@ -152,49 +186,59 @@
       transform: translateY(0);
     }
 
-    .delay-1 { transition-delay: 0.12s; }
-    .delay-2 { transition-delay: 0.25s; }
-    .delay-3 { transition-delay: 0.38s; }
-    .delay-4 { transition-delay: 0.5s; }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.22s; }
+    .delay-3 { transition-delay: 0.34s; }
+    .delay-4 { transition-delay: 0.46s; }
 
-    @keyframes floatSlow {
+    @keyframes floatBadge {
       0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
+      50% { transform: translateY(-7px); }
     }
 
     .float-badge {
-      animation: floatSlow 4.2s ease-in-out infinite;
+      animation: floatBadge 4s ease-in-out infinite;
     }
 
     .text-gradient {
-      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 48%, #0284c7 100%);
+      background: linear-gradient(135deg, #312e81 0%, #4f46e5 45%, #0284c7 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
   </style>
 </head>
-<body class="antialiased selection:bg-indigo-500/20 selection:text-indigo-900">
+<body class="antialiased selection:bg-indigo-500/20 selection:text-indigo-950">
 
-  <!-- ANIMATED LIQUID MESH BACKGROUND -->
-  <div class="liquid-mesh">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-  </div>
+  <!-- SVG LIQUID REFRACTION FILTER (Subtle Optical Water Distortion) -->
+  <svg class="hidden" aria-hidden="true">
+    <defs>
+      <filter id="liquid-refraction">
+        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.012" numOctaves="2" seed="3" result="noise" />
+        <feGaussianBlur in="noise" stdDeviation="2" result="smoothNoise" />
+        <feDisplacementMap in="SourceGraphic" in2="smoothNoise" scale="14" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
 
-  <!-- LIGHT LIQUID GLASS PRELOADER -->
+  <!-- VIVID APPLE WALLPAPER + FLOATING REFRACTION ORBS -->
+  <div class="apple-wallpaper"></div>
+  <div class="refract-orb w-72 h-72 bg-indigo-400/60 top-24 left-12"></div>
+  <div class="refract-orb w-80 h-80 bg-cyan-300/70 top-1/3 right-16" style="animation-delay: -3s;"></div>
+  <div class="refract-orb w-72 h-72 bg-pink-300/65 bottom-16 left-1/3" style="animation-delay: -6s;"></div>
+
+  <!-- APPLE LIQUID GLASS PRELOADER -->
   <div id="intro-preloader">
-    <div class="liquid-glass rounded-3xl p-8 w-[90%] max-w-md">
-      <div class="flex justify-between items-center text-xs mono text-slate-500 mb-3">
-        <span class="flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-indigo-500 animate-ping"></span>
+    <div class="apple-glass rounded-[2rem] p-8 w-[90%] max-w-md relative z-10">
+      <div class="flex justify-between items-center text-xs mono text-slate-600 mb-3 relative z-10">
+        <span class="flex items-center gap-2 font-semibold">
+          <span class="w-2 h-2 rounded-full bg-indigo-600 animate-ping"></span>
           <span id="render-status">GENERATING SEQUENCE...</span>
         </span>
-        <span id="timecode" class="text-indigo-600 font-semibold">00:00:00:00</span>
+        <span id="timecode" class="text-indigo-700 font-bold">00:00:00:00</span>
       </div>
 
-      <div class="text-center my-6">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 border border-white text-indigo-600 mono text-xs font-semibold shadow-sm mb-2">
+      <div class="text-center my-6 relative z-10">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-pill text-indigo-700 mono text-xs font-bold mb-2">
           GOOGLE FLOW • 3D • PREMIERE PRO
         </div>
         <h2 class="text-2xl sm:text-3xl font-extrabold tracking-widest text-slate-900 uppercase">
@@ -202,38 +246,37 @@
         </h2>
       </div>
 
-      <div class="relative w-full h-10 bg-white/60 border border-white rounded-xl overflow-hidden p-1.5 shadow-inner">
-        <div class="timeline-ticks absolute inset-0 opacity-50"></div>
-        <div id="timeline-bar" class="h-full w-0 rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-400 transition-all duration-75 relative flex items-center justify-end pr-2 shadow-sm">
+      <div class="relative w-full h-10 bg-white/45 border border-white/80 rounded-2xl overflow-hidden p-1.5 shadow-inner z-10">
+        <div id="timeline-bar" class="h-full w-0 rounded-xl bg-gradient-to-r from-indigo-600 via-violet-500 to-cyan-500 transition-all duration-75 relative flex items-center justify-end pr-2.5 shadow-md">
           <span class="text-[10px] mono font-bold text-white">SEQ_01</span>
         </div>
       </div>
 
-      <div class="flex justify-between items-center mt-3 text-xs mono text-slate-500">
+      <div class="flex justify-between items-center mt-3 text-xs mono text-slate-600 relative z-10">
         <span>1080p / 60FPS</span>
-        <span id="loader-percent" class="text-slate-900 font-bold">0%</span>
+        <span id="loader-percent" class="text-slate-900 font-extrabold">0%</span>
       </div>
     </div>
   </div>
 
-  <!-- FLOATING GLASS NAVBAR -->
+  <!-- FLOATING DYNAMIC ISLAND STYLE LIQUID NAVBAR -->
   <header class="fixed top-4 inset-x-0 z-50 px-4">
-    <div class="max-w-5xl mx-auto liquid-pill rounded-2xl px-5 py-2.5 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-2.5 group">
-        <img src="./ahsan.jpg" onerror="this.onerror=null;this.src='./ahsan.jpeg';" alt="Muhammad Ahsan" class="w-9 h-9 rounded-xl object-cover border-2 border-white shadow-sm" />
-        <span class="font-bold tracking-tight text-slate-900 text-base sm:text-lg">
+    <div class="max-w-5xl mx-auto apple-glass rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2.5 relative z-10">
+        <img src="./ahsan.jpg" onerror="this.onerror=null;this.src='./ahsan.jpeg';" alt="Muhammad Ahsan" class="w-9 h-9 rounded-full object-cover border-2 border-white shadow-md" />
+        <span class="font-extrabold tracking-tight text-slate-900 text-base sm:text-lg">
           Ahsan<span class="text-indigo-600">.edit</span>
         </span>
       </a>
 
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+      <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-700 relative z-10">
         <a href="#work" class="hover:text-indigo-600 transition">Portfolio</a>
         <a href="#models" class="hover:text-indigo-600 transition">AI Stack</a>
         <a href="#services" class="hover:text-indigo-600 transition">Services</a>
         <a href="#contact" class="hover:text-indigo-600 transition">Contact</a>
       </nav>
 
-      <a href="#contact" class="px-4 py-2 rounded-xl bg-slate-900 text-white font-semibold text-xs sm:text-sm hover:bg-indigo-600 transition shadow-md">
+      <a href="#contact" class="relative z-10 px-4 py-2 rounded-full bg-slate-900 text-white font-semibold text-xs sm:text-sm hover:bg-indigo-600 transition shadow-lg">
         Book an Edit
       </a>
     </div>
@@ -246,8 +289,8 @@
         
         <!-- Left Text -->
         <div class="lg:col-span-7">
-          <div class="reveal-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full liquid-pill text-xs sm:text-sm font-medium text-slate-700 mb-6">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <div class="reveal-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-pill text-xs sm:text-sm font-semibold text-slate-800 mb-6">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
             Available for High-Converting Ad & AI Video Projects
           </div>
 
@@ -257,63 +300,63 @@
             & 3D Pixar Edits.
           </h1>
 
-          <p class="reveal-up delay-2 text-slate-600 text-base sm:text-lg max-w-xl leading-relaxed mb-8">
-            Hi, I’m <strong class="text-slate-900">Muhammad Ahsan</strong>. I craft high-retention AI video ads powered by Google Flow (<strong class="text-slate-800">Veo 3.1, Veo 3, Veo 2, Imagen 3, Omni & Flash</strong>), custom 3D Pixar-style stories, and sharp pacing in Premiere Pro.
+          <p class="reveal-up delay-2 text-slate-700 text-base sm:text-lg max-w-xl leading-relaxed mb-8 font-medium">
+            Hi, I’m <strong class="text-slate-950">Muhammad Ahsan</strong>. I craft high-retention AI video ads powered by Google Flow (<strong class="text-indigo-900">Veo 3.1, Veo 3, Veo 2, Imagen 3, Omni & Flash</strong>), custom 3D Pixar-style stories, and sharp pacing in Premiere Pro.
           </p>
 
           <div class="reveal-up delay-3 flex flex-wrap items-center gap-4">
-            <a href="#work" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition">
+            <a href="#work" class="px-7 py-3.5 rounded-full bg-slate-900 hover:bg-indigo-600 text-white font-bold text-sm sm:text-base shadow-xl shadow-slate-900/20 transition">
               Watch Featured Work
             </a>
-            <a href="#contact" class="px-6 py-3.5 rounded-2xl liquid-pill text-slate-900 hover:text-indigo-600 font-semibold text-sm sm:text-base transition">
+            <a href="#contact" class="px-7 py-3.5 rounded-full glass-pill text-slate-900 hover:text-indigo-700 font-bold text-sm sm:text-base">
               Get a Custom Quote
             </a>
           </div>
 
           <div class="reveal-up delay-4 grid grid-cols-3 gap-3 sm:gap-5 max-w-lg mt-10">
-            <div class="liquid-pill rounded-2xl p-3.5">
-              <p class="text-base sm:text-lg font-extrabold text-slate-900">Google Flow</p>
-              <p class="text-xs text-slate-500 mt-0.5">Veo 3.1 • Imagen 3</p>
+            <div class="apple-glass rounded-3xl p-4">
+              <p class="text-base sm:text-lg font-extrabold text-slate-900 relative z-10">Google Flow</p>
+              <p class="text-xs text-slate-600 font-medium mt-0.5 relative z-10">Veo 3.1 • Imagen 3</p>
             </div>
-            <div class="liquid-pill rounded-2xl p-3.5">
-              <p class="text-base sm:text-lg font-extrabold text-slate-900">3D Pixar</p>
-              <p class="text-xs text-slate-500 mt-0.5">AI Character Stories</p>
+            <div class="apple-glass rounded-3xl p-4">
+              <p class="text-base sm:text-lg font-extrabold text-slate-900 relative z-10">3D Pixar</p>
+              <p class="text-xs text-slate-600 font-medium mt-0.5 relative z-10">AI Character Stories</p>
             </div>
-            <div class="liquid-pill rounded-2xl p-3.5">
-              <p class="text-base sm:text-lg font-extrabold text-slate-900">Premiere Pro</p>
-              <p class="text-xs text-slate-500 mt-0.5">UGC & Direct Response</p>
+            <div class="apple-glass rounded-3xl p-4">
+              <p class="text-base sm:text-lg font-extrabold text-slate-900 relative z-10">Premiere Pro</p>
+              <p class="text-xs text-slate-600 font-medium mt-0.5 relative z-10">UGC & Direct Response</p>
             </div>
           </div>
         </div>
 
-        <!-- Right Liquid Glass Profile Card -->
+        <!-- Right Apple Liquid Glass Profile Card -->
         <div class="lg:col-span-5 flex justify-center reveal-up delay-2">
           <div class="relative w-72 sm:w-80">
-            <div class="liquid-glass rounded-[2rem] p-3">
-              <div class="rounded-[1.5rem] overflow-hidden bg-white/60">
+            <div class="apple-glass rounded-[2.25rem] p-3.5">
+              <div class="rounded-[1.65rem] overflow-hidden bg-white/50 border border-white/80 relative z-10 shadow-inner">
                 <img src="./ahsan.jpg" onerror="this.onerror=null;this.src='./ahsan.jpeg';" alt="Muhammad Ahsan — AI Video & Premiere Pro Editor" class="w-full aspect-square object-cover object-top" />
               </div>
-              <div class="pt-4 pb-2 px-2 flex items-center justify-between">
+              <div class="pt-4 pb-1.5 px-2 flex items-center justify-between relative z-10">
                 <div>
-                  <p class="text-base font-bold text-slate-900">Muhammad Ahsan</p>
-                  <p class="text-xs text-slate-500">AI Video & Premiere Pro Editor</p>
+                  <p class="text-base font-extrabold text-slate-900">Muhammad Ahsan</p>
+                  <p class="text-xs font-medium text-slate-600">AI Video & Premiere Pro Editor</p>
                 </div>
-                <span class="px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 text-[11px] mono font-bold">
+                <span class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-800 text-[11px] mono font-bold">
                   ONLINE
                 </span>
               </div>
             </div>
 
             <!-- Floating Glass Badge 1 -->
-            <div class="float-badge hidden sm:flex items-center gap-2 px-4 py-2 rounded-2xl liquid-pill absolute -top-4 -left-8">
-              <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
-              <span class="text-xs font-bold text-slate-800">Premiere Pro Editor</span>
+            <div class="float-badge hidden sm:flex items-center gap-2 px-4 py-2 rounded-full glass-pill absolute -top-4 -left-8 z-20">
+              <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
+              <span class="text-xs font-bold text-slate-900">Premiere Pro Editor</span>
             </div>
 
             <!-- Floating Glass Badge 2 -->
-            <div class="float-badge hidden sm:flex items-center gap-2 px-4 py-2 rounded-2xl liquid-pill absolute -bottom-4 -right-6" style="animation-delay: 1.5s;">
+            <div class="float-badge hidden sm:flex items-center gap-2 px-4 py-2 rounded-full glass-pill absolute -bottom-4 -right-6 z-20" style="animation-delay: 1.5s;">
               <span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>
-              <span class="text-xs font-bold text-slate-800">Veo 3.1 • Omni • Flash</span>
+              <span class="text-xs font-bold text-slate-900">Veo 3.1 • Omni • Flash</span>
             </div>
           </div>
         </div>
@@ -325,39 +368,39 @@
   <!-- GOOGLE FLOW AI MODELS STACK SECTION -->
   <section id="models" class="py-10">
     <div class="max-w-6xl mx-auto px-5">
-      <div class="liquid-glass rounded-3xl p-6 sm:p-8">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+      <div class="apple-glass rounded-[2.25rem] p-6 sm:p-9">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 relative z-10">
           <div>
-            <span class="mono text-xs font-bold uppercase tracking-widest text-indigo-600">AI Production Engine</span>
-            <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Google Flow & Next-Gen AI Models I Work With</h3>
+            <span class="mono text-xs font-bold uppercase tracking-widest text-indigo-700">AI Production Engine</span>
+            <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Google Flow & Next-Gen AI Models</h3>
           </div>
-          <span class="text-xs mono text-slate-500">Text-to-Video • Image-to-Video • Character Consistency</span>
+          <span class="text-xs mono font-semibold text-slate-600">Text-to-Video • Image-to-Video • Character Consistency</span>
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          <div class="liquid-pill rounded-2xl p-3.5 text-center">
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 relative z-10">
+          <div class="glass-pill rounded-2xl p-4 text-center">
             <p class="font-extrabold text-sm text-indigo-700">Veo 3.1</p>
-            <p class="text-[11px] text-slate-500 mt-0.5">Flagship Cinema AI</p>
+            <p class="text-[11px] font-medium text-slate-600 mt-0.5">Flagship Cinema AI</p>
           </div>
-          <div class="liquid-pill rounded-2xl p-3.5 text-center">
+          <div class="glass-pill rounded-2xl p-4 text-center">
             <p class="font-extrabold text-sm text-violet-700">Veo 3 / Fast</p>
-            <p class="text-[11px] text-slate-500 mt-0.5">Native Audio & Lip-Sync</p>
+            <p class="text-[11px] font-medium text-slate-600 mt-0.5">Native Audio & Lip-Sync</p>
           </div>
-          <div class="liquid-pill rounded-2xl p-3.5 text-center">
+          <div class="glass-pill rounded-2xl p-4 text-center">
             <p class="font-extrabold text-sm text-cyan-700">Veo 2</p>
-            <p class="text-[11px] text-slate-500 mt-0.5">Physics & Camera Control</p>
+            <p class="text-[11px] font-medium text-slate-600 mt-0.5">Physics & Camera Control</p>
           </div>
-          <div class="liquid-pill rounded-2xl p-3.5 text-center">
+          <div class="glass-pill rounded-2xl p-4 text-center">
             <p class="font-extrabold text-sm text-sky-700">Imagen 3</p>
-            <p class="text-[11px] text-slate-500 mt-0.5">Photoreal Keyframes</p>
+            <p class="text-[11px] font-medium text-slate-600 mt-0.5">Photoreal Keyframes</p>
           </div>
-          <div class="liquid-pill rounded-2xl p-3.5 text-center">
+          <div class="glass-pill rounded-2xl p-4 text-center">
             <p class="font-extrabold text-sm text-fuchsia-700">Omni Models</p>
-            <p class="text-[11px] text-slate-500 mt-0.5">Multimodal Consistency</p>
+            <p class="text-[11px] font-medium text-slate-600 mt-0.5">Multimodal Consistency</p>
           </div>
-          <div class="liquid-pill rounded-2xl p-3.5 text-center">
+          <div class="glass-pill rounded-2xl p-4 text-center">
             <p class="font-extrabold text-sm text-emerald-700">Flash Models</p>
-            <p class="text-[11px] text-slate-500 mt-0.5">Rapid Ad Variations</p>
+            <p class="text-[11px] font-medium text-slate-600 mt-0.5">Rapid Ad Variations</p>
           </div>
         </div>
       </div>
@@ -369,70 +412,70 @@
     <div class="max-w-6xl mx-auto px-5">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
         <div>
-          <span class="mono text-xs font-bold uppercase tracking-widest text-indigo-600">Selected Projects</span>
+          <span class="mono text-xs font-bold uppercase tracking-widest text-indigo-700">Selected Projects</span>
           <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">Recent Edits & Campaigns</h2>
         </div>
-        <p class="text-sm text-slate-600 max-w-md">
+        <p class="text-sm font-medium text-slate-700 max-w-md">
           Engineered for maximum watch time, strong 3-second hooks, and measurable conversions.
         </p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-7">
         <!-- Project 1 -->
-        <div class="liquid-glass rounded-3xl p-3 flex flex-col">
-          <div class="aspect-[9/13] rounded-2xl bg-gradient-to-br from-indigo-100 via-white/80 to-violet-100 border border-white relative flex items-center justify-center overflow-hidden">
-            <div class="text-center p-6 relative z-10">
-              <span class="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-700 text-xs mono font-bold">AI UGC AD</span>
+        <div class="apple-glass rounded-[2rem] p-3.5 flex flex-col">
+          <div class="aspect-[9/13] rounded-[1.5rem] bg-gradient-to-br from-indigo-500/15 via-white/50 to-violet-500/20 border border-white/80 relative flex items-center justify-center overflow-hidden z-10">
+            <div class="text-center p-6">
+              <span class="px-3.5 py-1 rounded-full glass-pill text-indigo-700 text-xs mono font-bold">AI UGC AD</span>
               <h3 class="text-xl font-extrabold text-slate-900 mt-3">Skincare Brand UGC</h3>
-              <p class="text-xs text-slate-600 mt-1">SerlinoLab • Veo 3.1 & Imagen 3</p>
-              <a href="mailto:ahsanhereyt@gmail.com?subject=Requesting%20AI%20UGC%20Sample" class="mt-5 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-indigo-600 transition shadow-md">
+              <p class="text-xs font-medium text-slate-600 mt-1">SerlinoLab • Veo 3.1 & Imagen 3</p>
+              <a href="mailto:ahsanhereyt@gmail.com?subject=Requesting%20AI%20UGC%20Sample" class="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900 text-white text-xs font-bold hover:bg-indigo-600 transition shadow-lg">
                 ▶ Request / Watch Demo
               </a>
             </div>
           </div>
-          <div class="p-4">
-            <h4 class="font-bold text-slate-900">Direct Response AI UGC</h4>
-            <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+          <div class="p-4 relative z-10">
+            <h4 class="font-extrabold text-slate-900">Direct Response AI UGC</h4>
+            <p class="text-xs font-medium text-slate-600 mt-1.5 leading-relaxed">
               Hyper-realistic AI spokesperson built in Google Flow (Veo 3.1 & Omni), cut with sharp B-roll, captions, and sound design in Premiere Pro.
             </p>
           </div>
         </div>
 
         <!-- Project 2 -->
-        <div class="liquid-glass rounded-3xl p-3 flex flex-col">
-          <div class="aspect-[9/13] rounded-2xl bg-gradient-to-br from-cyan-100 via-white/80 to-sky-100 border border-white relative flex items-center justify-center overflow-hidden">
-            <div class="text-center p-6 relative z-10">
-              <span class="px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/25 text-cyan-800 text-xs mono font-bold">3D ANIMATION</span>
+        <div class="apple-glass rounded-[2rem] p-3.5 flex flex-col">
+          <div class="aspect-[9/13] rounded-[1.5rem] bg-gradient-to-br from-cyan-500/15 via-white/50 to-sky-500/20 border border-white/80 relative flex items-center justify-center overflow-hidden z-10">
+            <div class="text-center p-6">
+              <span class="px-3.5 py-1 rounded-full glass-pill text-cyan-800 text-xs mono font-bold">3D ANIMATION</span>
               <h3 class="text-xl font-extrabold text-slate-900 mt-3">3D Pixar-Style Story</h3>
-              <p class="text-xs text-slate-600 mt-1">Imagen 3 Keyframes • Veo 3 Lip-Sync</p>
-              <a href="mailto:ahsanhereyt@gmail.com?subject=Requesting%203D%20Animation%20Sample" class="mt-5 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-cyan-600 transition shadow-md">
+              <p class="text-xs font-medium text-slate-600 mt-1">Imagen 3 Keyframes • Veo 3 Lip-Sync</p>
+              <a href="mailto:ahsanhereyt@gmail.com?subject=Requesting%203D%20Animation%20Sample" class="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900 text-white text-xs font-bold hover:bg-cyan-600 transition shadow-lg">
                 ▶ Request / Watch Demo
               </a>
             </div>
           </div>
-          <div class="p-4">
-            <h4 class="font-bold text-slate-900">3D Stylized Commercials</h4>
-            <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+          <div class="p-4 relative z-10">
+            <h4 class="font-extrabold text-slate-900">3D Stylized Commercials</h4>
+            <p class="text-xs font-medium text-slate-600 mt-1.5 leading-relaxed">
               Expressive 3D animated characters, consistent scene-to-scene flow, natural voiceovers, and cinematic color grading.
             </p>
           </div>
         </div>
 
         <!-- Project 3 -->
-        <div class="liquid-glass rounded-3xl p-3 flex flex-col">
-          <div class="aspect-[9/13] rounded-2xl bg-gradient-to-br from-fuchsia-100 via-white/80 to-purple-100 border border-white relative flex items-center justify-center overflow-hidden">
-            <div class="text-center p-6 relative z-10">
-              <span class="px-3 py-1 rounded-full bg-purple-500/15 border border-purple-500/25 text-purple-800 text-xs mono font-bold">DIRECT RESPONSE</span>
+        <div class="apple-glass rounded-[2rem] p-3.5 flex flex-col">
+          <div class="aspect-[9/13] rounded-[1.5rem] bg-gradient-to-br from-fuchsia-500/15 via-white/50 to-purple-500/20 border border-white/80 relative flex items-center justify-center overflow-hidden z-10">
+            <div class="text-center p-6">
+              <span class="px-3.5 py-1 rounded-full glass-pill text-purple-800 text-xs mono font-bold">DIRECT RESPONSE</span>
               <h3 class="text-xl font-extrabold text-slate-900 mt-3">High-Retention Promo</h3>
-              <p class="text-xs text-slate-600 mt-1">Premiere Pro Pacing & Flash AI</p>
-              <a href="mailto:ahsanhereyt@gmail.com?subject=Requesting%20Direct%20Response%20Sample" class="mt-5 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-purple-600 transition shadow-md">
+              <p class="text-xs font-medium text-slate-600 mt-1">Premiere Pro Pacing & Flash AI</p>
+              <a href="mailto:ahsanhereyt@gmail.com?subject=Requesting%20Direct%20Response%20Sample" class="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900 text-white text-xs font-bold hover:bg-purple-600 transition shadow-lg">
                 ▶ Request / Watch Demo
               </a>
             </div>
           </div>
-          <div class="p-4">
-            <h4 class="font-bold text-slate-900">Fast-Paced Social Ads</h4>
-            <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+          <div class="p-4 relative z-10">
+            <h4 class="font-extrabold text-slate-900">Fast-Paced Social Ads</h4>
+            <p class="text-xs font-medium text-slate-600 mt-1.5 leading-relaxed">
               Pattern interrupts every 2–3 seconds, clean captions, SFX, and persuasive CTA end-cards edited in Premiere Pro.
             </p>
           </div>
@@ -445,37 +488,37 @@
   <section id="services" class="py-16">
     <div class="max-w-6xl mx-auto px-5">
       <div class="mb-12">
-        <span class="mono text-xs font-bold uppercase tracking-widest text-cyan-700">What I Do</span>
+        <span class="mono text-xs font-bold uppercase tracking-widest text-cyan-800">What I Do</span>
         <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">Specialized Editing & AI Services</h2>
       </div>
 
       <div class="grid md:grid-cols-3 gap-7">
-        <div class="liquid-glass p-7 rounded-3xl">
-          <div class="w-11 h-11 rounded-2xl bg-indigo-500/15 border border-white flex items-center justify-center text-indigo-700 font-extrabold mb-5">
+        <div class="apple-glass p-7 rounded-[2rem]">
+          <div class="w-12 h-12 rounded-2xl glass-pill flex items-center justify-center text-indigo-700 font-extrabold mb-5 relative z-10">
             01
           </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">AI UGC Video Ads</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
+          <h3 class="text-xl font-extrabold text-slate-900 mb-2 relative z-10">AI UGC Video Ads</h3>
+          <p class="text-sm font-medium text-slate-700 leading-relaxed relative z-10">
             Script-to-screen AI creator ads using Google Flow (Veo 3.1, Veo 3, Omni & Flash) with natural voiceovers and winning direct-response hooks.
           </p>
         </div>
 
-        <div class="liquid-glass p-7 rounded-3xl">
-          <div class="w-11 h-11 rounded-2xl bg-cyan-500/15 border border-white flex items-center justify-center text-cyan-700 font-extrabold mb-5">
+        <div class="apple-glass p-7 rounded-[2rem]">
+          <div class="w-12 h-12 rounded-2xl glass-pill flex items-center justify-center text-cyan-700 font-extrabold mb-5 relative z-10">
             02
           </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">Direct Response Editing</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
+          <h3 class="text-xl font-extrabold text-slate-900 mb-2 relative z-10">Direct Response Editing</h3>
+          <p class="text-sm font-medium text-slate-700 leading-relaxed relative z-10">
             Retention-engineered edits in Adobe Premiere Pro featuring dynamic captions, custom SFX, crisp cuts, and visual proof overlays.
           </p>
         </div>
 
-        <div class="liquid-glass p-7 rounded-3xl">
-          <div class="w-11 h-11 rounded-2xl bg-purple-500/15 border border-white flex items-center justify-center text-purple-700 font-extrabold mb-5">
+        <div class="apple-glass p-7 rounded-[2rem]">
+          <div class="w-12 h-12 rounded-2xl glass-pill flex items-center justify-center text-purple-700 font-extrabold mb-5 relative z-10">
             03
           </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">3D Pixar-Style Animations</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
+          <h3 class="text-xl font-extrabold text-slate-900 mb-2 relative z-10">3D Pixar-Style Animations</h3>
+          <p class="text-sm font-medium text-slate-700 leading-relaxed relative z-10">
             Memorable 3D animated storytelling videos and brand characters built with Imagen 3 & Veo models to stand out in crowded feeds.
           </p>
         </div>
@@ -486,38 +529,41 @@
   <!-- CONTACT / CTA SECTION -->
   <section id="contact" class="py-20">
     <div class="max-w-4xl mx-auto px-5">
-      <div class="liquid-glass rounded-[2.5rem] p-8 sm:p-14 text-center">
-        <span class="mono text-xs font-bold uppercase tracking-widest text-indigo-600">Let's Scale Your Brand</span>
-        <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 mt-3 mb-5">
-          Ready to Turn Views Into Customers?
-        </h2>
-        <p class="text-slate-600 text-base sm:text-lg max-w-xl mx-auto mb-9">
-          Send over your raw footage, product link, or script idea—and let’s create high-converting video assets together.
-        </p>
+      <div class="apple-glass rounded-[2.75rem] p-8 sm:p-14 text-center">
+        <div class="relative z-10">
+          <span class="mono text-xs font-bold uppercase tracking-widest text-indigo-700">Let's Scale Your Brand</span>
+          <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 mt-3 mb-5">
+            Ready to Turn Views Into Customers?
+          </h2>
+          <p class="text-slate-700 font-medium text-base sm:text-lg max-w-xl mx-auto mb-9">
+            Send over your raw footage, product link, or script idea—and let’s create high-converting video assets together.
+          </p>
 
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="mailto:ahsanhereyt@gmail.com?subject=Video%20Editing%20Project%20Inquiry" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-slate-900 text-white font-bold text-sm sm:text-base hover:bg-indigo-600 transition shadow-lg">
-            Email: ahsanhereyt@gmail.com
-          </a>
-          <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="w-full sm:w-auto px-8 py-4 rounded-2xl liquid-pill text-slate-900 hover:text-indigo-600 font-bold text-sm sm:text-base transition">
-            Connect on LinkedIn
-          </a>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="mailto:ahsanhereyt@gmail.com?subject=Video%20Editing%20Project%20Inquiry" class="w-full sm:w-auto px-8 py-4 rounded-full bg-slate-900 text-white font-bold text-sm sm:text-base hover:bg-indigo-600 transition shadow-xl">
+              Email: ahsanhereyt@gmail.com
+            </a>
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="w-full sm:w-auto px-8 py-4 rounded-full glass-pill text-slate-900 hover:text-indigo-700 font-bold text-sm sm:text-base">
+              Connect on LinkedIn
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="py-8 text-center text-xs text-slate-500">
+  <footer class="py-8 text-center text-xs font-medium text-slate-600">
     <div class="max-w-6xl mx-auto px-5 flex flex-col sm:flex-row items-center justify-between gap-3">
       <p>© 2026 Muhammad Ahsan. All rights reserved.</p>
       <p class="mono">Powered by Google Flow AI & Premiere Pro</p>
     </div>
   </footer>
 
-  <!-- INTRO TIMELINE SCRIPT -->
+  <!-- INTRO TIMELINE + INTERACTIVE CURSOR GLASS GLARE SCRIPT -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      // Preloader Timeline
       const preloader = document.getElementById("intro-preloader");
       const bar = document.getElementById("timeline-bar");
       const percentText = document.getElementById("loader-percent");
@@ -544,6 +590,17 @@
         const secs = String(Math.floor((progress / 100) * 3)).padStart(2, "0");
         timecodeText.textContent = `00:00:${secs}:${frames}`;
       }, 45);
+
+      // Apple Liquid Glass Cursor Specular Glare Tracking
+      document.querySelectorAll(".apple-glass").forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty("--x", `${x}px`);
+          card.style.setProperty("--y", `${y}px`);
+        });
+      });
     });
   </script>
 </body>
