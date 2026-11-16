@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Muhammad Ahsan (AE) — AI UGC, Direct Response & 3D Video Editor</title>
+  <title>Muhammad Ahsan — AI UGC, Direct Response & 3D Video Editor</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,6 +88,16 @@
       100% { transform: translate(30px, -25px) scale(1.12); }
     }
 
+    /* Floating Badges Animation */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .float-badge {
+      animation: floatSlow 4s ease-in-out infinite;
+    }
+
     /* Glass Card */
     .glass-card {
       background: var(--card-bg);
@@ -112,10 +122,9 @@
 </head>
 <body class="antialiased selection:bg-violet-500/30 selection:text-violet-200">
 
-  <!-- CINEMATIC TIMELINE INTRO PRELOADER -->
+  <!-- CINEMATIC TIMELINE INTRO PRELOADER (Clean Motion Graphics) -->
   <div id="intro-preloader">
     <div class="w-full max-w-md px-6">
-      <!-- Top Timecode & Status -->
       <div class="flex justify-between items-center text-xs mono text-zinc-400 mb-3">
         <span class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
@@ -124,26 +133,22 @@
         <span id="timecode" class="text-violet-400 font-semibold">00:00:00:00</span>
       </div>
 
-      <!-- Brand Flash -->
       <div class="text-center my-6">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-violet-500/10 border border-violet-500/30 text-violet-300 mono text-xs mb-2">
-          AE • PR • AI VFX
+          MOTION • 3D • AI VFX
         </div>
-        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
-          MUHAMMAD AHSAN
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-widest text-white uppercase">
+          VISUAL STUDIO
         </h2>
       </div>
 
-      <!-- Timeline Track & Playhead -->
       <div class="relative w-full h-10 bg-zinc-900/90 border border-zinc-800 rounded-lg overflow-hidden p-1.5">
         <div class="timeline-ticks absolute inset-0 opacity-40"></div>
-        <!-- Video Track Clip -->
         <div id="timeline-bar" class="h-full w-0 rounded bg-gradient-to-r from-violet-600 via-indigo-500 to-cyan-400 transition-all duration-75 relative flex items-center justify-end pr-2">
-          <span class="text-[10px] mono font-bold text-black/80">COMP_01</span>
+          <span class="text-[10px] mono font-bold text-black/80">SEQ_01</span>
         </div>
       </div>
 
-      <!-- Percentage -->
       <div class="flex justify-between items-center mt-3 text-xs mono text-zinc-500">
         <span>1080p / 60FPS</span>
         <span id="loader-percent" class="text-white font-semibold">0%</span>
@@ -155,9 +160,7 @@
   <header class="fixed top-0 inset-x-0 z-50 border-b border-white/5 bg-[#07070a]/80 backdrop-blur-md">
     <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
       <a href="#" class="flex items-center gap-2.5 group">
-        <span class="w-9 h-9 rounded-lg bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center font-extrabold text-sm text-white shadow-lg shadow-violet-600/20 group-hover:scale-105 transition">
-          AE
-        </span>
+        <img src="ahsan.jpg" alt="Muhammad Ahsan" class="w-9 h-9 rounded-lg object-cover border border-violet-500/50 shadow-md" />
         <span class="font-bold tracking-tight text-white text-base sm:text-lg">
           Ahsan<span class="text-violet-400">.edit</span>
         </span>
@@ -166,7 +169,7 @@
       <nav class="hidden md:flex items-center gap-8 text-sm text-zinc-400">
         <a href="#work" class="hover:text-white transition">Portfolio</a>
         <a href="#services" class="hover:text-white transition">Services</a>
-        <a href="#workflow" class="hover:text-white transition">Workflow</a>
+        <a href="#contact" class="hover:text-white transition">Contact</a>
       </nav>
 
       <a href="#contact" class="px-4 py-2 rounded-lg bg-white text-black font-semibold text-xs sm:text-sm hover:bg-violet-400 hover:text-black transition shadow-md">
@@ -175,57 +178,90 @@
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
-    <!-- Ambient Lights -->
+  <!-- HERO SECTION WITH PROFILE IMAGE -->
+  <section class="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden">
     <div class="glow-orb w-96 h-96 bg-violet-600 top-16 -left-24"></div>
     <div class="glow-orb w-80 h-80 bg-cyan-500 bottom-10 -right-20" style="animation-delay: 2s;"></div>
 
     <div class="max-w-6xl mx-auto px-5 relative z-10 w-full">
-      <div class="max-w-3xl">
-        <!-- Status Pill -->
-        <div class="reveal-up inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm text-zinc-300 mb-6">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          Available for High-Converting Ad & Animation Projects
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Text Content -->
+        <div class="lg:col-span-7">
+          <div class="reveal-up inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm text-zinc-300 mb-6">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            Available for High-Converting Ad & Animation Projects
+          </div>
+
+          <h1 class="reveal-up delay-1 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08] mb-6">
+            Scroll-Stopping <br />
+            <span class="text-gradient">AI UGC, Direct Response</span> <br />
+            & 3D Pixar Edits.
+          </h1>
+
+          <p class="reveal-up delay-2 text-zinc-400 text-base sm:text-lg max-w-xl leading-relaxed mb-8">
+            Hi, I’m <strong class="text-white">Muhammad Ahsan</strong>. I craft high-retention video ads, dynamic motion graphics in After Effects & Premiere Pro, and custom 3D Pixar-style visual stories built to scale brands.
+          </p>
+
+          <div class="reveal-up delay-3 flex flex-wrap items-center gap-4">
+            <a href="#work" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold text-sm sm:text-base shadow-lg shadow-violet-600/30 transition">
+              Watch Featured Work
+            </a>
+            <a href="#contact" class="px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold text-sm sm:text-base transition">
+              Get a Custom Quote
+            </a>
+          </div>
+
+          <div class="reveal-up delay-4 grid grid-cols-3 gap-4 sm:gap-8 max-w-md mt-10 pt-8 border-t border-white/10">
+            <div>
+              <p class="text-lg sm:text-xl font-bold text-white">UGC + DR</p>
+              <p class="text-xs text-zinc-500 mt-0.5">Hook-Focused Ads</p>
+            </div>
+            <div>
+              <p class="text-lg sm:text-xl font-bold text-white">3D Pixar</p>
+              <p class="text-xs text-zinc-500 mt-0.5">AI Character Stories</p>
+            </div>
+            <div>
+              <p class="text-lg sm:text-xl font-bold text-white">PR & AE</p>
+              <p class="text-xs text-zinc-500 mt-0.5">Pro Motion Polish</p>
+            </div>
+          </div>
         </div>
 
-        <!-- Main Headline -->
-        <h1 class="reveal-up delay-1 text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-6">
-          Scroll-Stopping <br />
-          <span class="text-gradient">AI UGC, Direct Response</span> <br />
-          & 3D Pixar Edits.
-        </h1>
+        <!-- Right Profile Photo Card -->
+        <div class="lg:col-span-5 flex justify-center reveal-up delay-2">
+          <div class="relative w-72 sm:w-80">
+            <!-- Outer Gradient Glow -->
+            <div class="absolute -inset-1.5 rounded-3xl bg-gradient-to-tr from-violet-600 via-indigo-500 to-cyan-400 opacity-60 blur-lg"></div>
+            
+            <!-- Photo Frame -->
+            <div class="relative rounded-3xl overflow-hidden bg-zinc-900 border border-white/15 shadow-2xl">
+              <img src="ahsan.jpg" alt="Muhammad Ahsan — Video Editor & Motion Designer" class="w-full aspect-square object-cover object-top" />
+              <div class="p-4 bg-[#0c0c12]/95 backdrop-blur-md border-t border-white/10 flex items-center justify-between">
+                <div>
+                  <p class="text-sm font-bold text-white">Muhammad Ahsan</p>
+                  <p class="text-xs text-zinc-400">Video Editor & AI Ad Creator</p>
+                </div>
+                <span class="px-2.5 py-1 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[11px] mono font-semibold">
+                  ONLINE
+                </span>
+              </div>
+            </div>
 
-        <!-- Subtext -->
-        <p class="reveal-up delay-2 text-zinc-400 text-base sm:text-lg max-w-2xl leading-relaxed mb-8">
-          Hi, I’m <strong class="text-white">Muhammad Ahsan</strong>. I craft high-retention video ads, dynamic motion graphics in After Effects & Premiere Pro, and custom 3D Pixar-style visual stories built to scale brands.
-        </p>
+            <!-- Floating Skill Pill Top-Left -->
+            <div class="float-badge hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#12121a]/90 backdrop-blur-md border border-violet-500/30 shadow-xl absolute -top-4 -left-8">
+              <span class="w-2.5 h-2.5 rounded-full bg-violet-500"></span>
+              <span class="text-xs font-semibold text-white">Premiere & After Effects</span>
+            </div>
 
-        <!-- CTA Buttons -->
-        <div class="reveal-up delay-3 flex flex-wrap items-center gap-4">
-          <a href="#work" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold text-sm sm:text-base shadow-lg shadow-violet-600/30 transition">
-            Watch Featured Work
-          </a>
-          <a href="#contact" class="px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold text-sm sm:text-base transition">
-            Get a Custom Quote
-          </a>
-        </div>
-
-        <!-- Quick Stats / Tools Bar -->
-        <div class="reveal-up delay-4 grid grid-cols-3 gap-4 sm:gap-8 max-w-lg mt-12 pt-8 border-t border-white/10">
-          <div>
-            <p class="text-xl sm:text-2xl font-bold text-white">UGC + DR</p>
-            <p class="text-xs text-zinc-500 mt-0.5">Hook-Focused Ads</p>
-          </div>
-          <div>
-            <p class="text-xl sm:text-2xl font-bold text-white">3D Pixar</p>
-            <p class="text-xs text-zinc-500 mt-0.5">AI Character Stories</p>
-          </div>
-          <div>
-            <p class="text-xl sm:text-2xl font-bold text-white">PR & AE</p>
-            <p class="text-xs text-zinc-500 mt-0.5">Pro Motion Polish</p>
+            <!-- Floating Skill Pill Bottom-Right -->
+            <div class="float-badge hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#12121a]/90 backdrop-blur-md border border-cyan-500/30 shadow-xl absolute -bottom-4 -right-6" style="animation-delay: 1.5s;">
+              <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+              <span class="text-xs font-semibold text-white">AI UGC & 3D Pixar</span>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -252,7 +288,6 @@
               <span class="px-3 py-1 rounded-full bg-violet-500/20 border border-violet-400/30 text-violet-300 text-xs mono">AI UGC AD</span>
               <h3 class="text-xl font-bold text-white mt-3">Skincare Brand UGC</h3>
               <p class="text-xs text-zinc-400 mt-1">SerlinoLab • Problem-Solution Hook</p>
-              <!-- Replace '#' with your Google Drive / YouTube video link -->
               <a href="mailto:ahsanhereyt@gmail.com?subject=Requesting%20AI%20UGC%20Sample" class="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-black text-xs font-bold hover:bg-violet-400 transition">
                 ▶ Request / Watch Demo
               </a>
@@ -378,7 +413,7 @@
   <!-- FOOTER -->
   <footer class="border-t border-white/5 py-8 text-center text-xs text-zinc-500">
     <div class="max-w-6xl mx-auto px-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <p>© 2026 Muhammad Ahsan (AE). All rights reserved.</p>
+      <p>© 2026 Muhammad Ahsan. All rights reserved.</p>
       <p class="mono">Built for High-Converting Visual Storytelling</p>
     </div>
   </footer>
@@ -408,7 +443,6 @@
         bar.style.width = progress + "%";
         percentText.textContent = progress + "%";
 
-        // Fake 60fps timecode progression
         const frames = String(Math.floor((progress / 100) * 59)).padStart(2, "0");
         const secs = String(Math.floor((progress / 100) * 3)).padStart(2, "0");
         timecodeText.textContent = `00:00:${secs}:${frames}`;
